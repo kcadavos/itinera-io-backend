@@ -1,0 +1,6 @@
+@itinera_io_backend_HostAddress = http://localhost:5054
+
+GET {{itinera_io_backend_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
