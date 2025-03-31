@@ -1,0 +1,19 @@
+# Ignore User Secrets folder (for ASP.NET Core)
+secrets.json
+
+# Ignore Environment configuration files
+.env
+*.env
+
+# Ignore local database files (SQL Server, SQLite, etc.)
+*.mdf
+*.ldf
+*.sqlite
+*.db
+
+# Ignore Entity Framework Core migration history (optional)
+Migrations/
+
+# Ignore appsettings.json containing connection strings
+appsettings.json
+appsettings.Development.json
