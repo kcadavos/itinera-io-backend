@@ -13,6 +13,6 @@ namespace itinera_io_backend.Models
 
         public string[]? Particpants{get;set;}
 
-        public string? TripStatus{get;set;}
+        public bool VotingStatus{get;set;}
     }
 }

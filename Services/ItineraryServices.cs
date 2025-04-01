@@ -6,14 +6,13 @@ using itinera_io_backend.Context;
 
 namespace itinera_io_backend.Services
 {
-    public class TripServices
+    public class ItineraryServices
     {
         private readonly DataContext _dataContext;
 
-        public TripServices (DataContext dataContext)
+        public ItineraryServices(DataContext dataContext)
         {
-            _dataContext= dataContext;
+            _dataContext = dataContext;
         }
-        
     }
 }
