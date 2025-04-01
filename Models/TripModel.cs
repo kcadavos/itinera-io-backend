@@ -11,8 +11,8 @@ namespace itinera_io_backend.Models
 
         public DateOnly EndDate{get;set;}
 
-        public string[]? Particpants{get;set;}
+        public string[]? Participants{get;set;}
 
-        public bool VotingStatus{get;set;}
+        public bool isVotingOpen{get;set;}
     }
 }
