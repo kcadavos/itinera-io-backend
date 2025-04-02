@@ -16,6 +16,7 @@ builder.Services.AddScoped<TripServices>();
 var connectionString = builder.Configuration.GetConnectionString("DatabaseConnection");
 builder.Services.AddDbContext<DataContext>(options=>options.UseSqlServer(connectionString));
 
+
 builder.Services.AddCors(options =>{
     options.AddPolicy("AllowAll",policy=>{ // create a cors policy with "AllowAll" as name
         policy.AllowAnyHeader()

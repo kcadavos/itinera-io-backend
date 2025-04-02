@@ -115,16 +115,25 @@ namespace itinera_io_backend.Services
             }
         }
 
+        // This works
+        // public async Task <UserModel> GetUserByEmailAsync (string email)  => await _dataContext.User.SingleOrDefaultAsync(user => user.Email == email);
         public async Task <UserInfoDTO> GetUserByEmailAsync (string email)
         {
             var userInDB = await _dataContext.User.SingleOrDefaultAsync(user => user.Email == email);
+           
             UserInfoDTO  user = new();
-
+            if (userInDB==null)
+                user=null;
+            else{
             user.Id = userInDB.Id;
             user.Email= userInDB.Email;
             user.Name = userInDB.Name;
-
+            }
+            
             return user;
+
         }
+
+
     }
 }

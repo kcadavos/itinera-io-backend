@@ -43,12 +43,13 @@ namespace itinera_io_backend.Controllers
         [HttpGet("GetUserByEmail/{email}")]
         public async Task<IActionResult> GetUserByEmail (string email )
         {
-            var user = await _userServices.GetUserByEmailAsync(email);
-            
-            if (user!=null)
-                return Ok(user);
+        var user = await _userServices.GetUserByEmailAsync(email);
+       
+            if (user!=null) return Ok(user);
             else
-                return BadRequest(new {Message = "No User Found."});
+            {
+            return BadRequest(new {Message = "No User Found."});
+            }
             
         }
     

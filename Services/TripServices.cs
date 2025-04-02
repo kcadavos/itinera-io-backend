@@ -20,8 +20,6 @@ namespace itinera_io_backend.Services
         //get trips based on the user email
         public async Task<List <TripModel>> GetTripsByEmailAsync (string email)=> await _dataContext.Trip.Where(trip => trip.Participants.Contains(email)).ToListAsync();
 
-        //  public async Task<List <TripModel>> GetTripsByEmailAsync (string email)=> await _dataContext.Trip.ToListAsync();
-
         public async Task<bool> AddTripAsync (TripModel trip)
         {
             await _dataContext.Trip.AddAsync(trip);
