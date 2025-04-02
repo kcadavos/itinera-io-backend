@@ -55,6 +55,14 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
+// Allow Swagger in Production (Uncomment if needed)
+app.UseSwagger();
+app.UseSwaggerUI(c =>
+{
+    c.SwaggerEndpoint("/swagger/v1/swagger.json", "My API V1");
+    c.RoutePrefix = string.Empty; // Loads Swagger at the root URL
+});
+
 app.UseHttpsRedirection();
 
 app.UseCors("AllowAll"); // policy nane AllowAll

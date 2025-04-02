@@ -40,10 +40,10 @@ namespace itinera_io_backend.Controllers
 
         }
 
-        [HttpGet("GetUserByEmail/{email}")]
-        public async Task<IActionResult> GetUserByEmail (string email )
+        [HttpGet("GetUserInfoByEmail/{email}")]
+        public async Task<IActionResult> GetUserInfoByEmail (string email )
         {
-        var user = await _userServices.GetUserByEmailAsync(email);
+        var user = await _userServices.GetUserInfoByEmailAsync(email);
        
             if (user!=null) return Ok(user);
             else
