@@ -36,6 +36,7 @@ namespace itinera_io_backend.Services
             userToAdd.Hash = encryptedPassword.Hash;
             userToAdd.Salt = encryptedPassword.Salt;
             userToAdd.Email = newUser.Email;
+            userToAdd.Name= newUser.Name;
 
             await _dataContext.User.AddAsync(userToAdd);
             return await _dataContext.SaveChangesAsync() != 0; // returns 1 if it has been added and 0 if not
