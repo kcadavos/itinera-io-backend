@@ -16,10 +16,10 @@ namespace itinera_io_backend.Controllers
             _activityServices = activityServices;
         }
 
-        [HttpGet("GetActivitiesByTripId/{id}")]
-        public async Task<IActionResult> GetActivitiesByTripId(int id)
+        [HttpGet("GetActivitiesByTripId/{tripId}")]
+        public async Task<IActionResult> GetActivitiesByTripId(int tripId)
         {
-            var activities = await _activityServices.GetActivitiesByTripIdAsync(id);
+            var activities = await _activityServices.GetActivitiesByTripIdAsync(tripId);
             if (activities !=null)
                 return Ok(activities);
                
