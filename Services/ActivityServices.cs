@@ -26,12 +26,24 @@ namespace itinera_io_backend.Services
             return await _dataContext.SaveChangesAsync()!=0;
         }
 
-        public async Task<bool> UpdateVoteAsync(int activityId,string email,string voteType)
+        // adds the user  to Vote Yes Or No List
+        public async Task<bool> AddVoteAsync(int activityId,string email,string voteType)
         {
             var trip = await _dataContext.Activity.FindAsync(activityId);
            
             if (voteType.ToLower()=="yes") trip.VoteYes.Add(email);
             if (voteType.ToLower() =="no") trip.VoteNo.Add(email);
+            return await _dataContext.SaveChangesAsync()!=0;
+           
+        }
+
+        // removes the user  to Vote Yes Or No List
+        public async Task<bool> RemoveVoteAsync(int activityId,string email,string voteType)
+        {
+            var trip = await _dataContext.Activity.FindAsync(activityId);
+           
+            if (voteType.ToLower()=="yes") trip.VoteYes.Remove(email);
+            if (voteType.ToLower() =="no") trip.VoteNo.Remove(email);
             return await _dataContext.SaveChangesAsync()!=0;
            
         }

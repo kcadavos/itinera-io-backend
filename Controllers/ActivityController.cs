@@ -36,15 +36,24 @@ namespace itinera_io_backend.Controllers
 
         }
 
-        [HttpPatch("UpdateVote")]
-        public async Task<IActionResult> UpdateVoteYes(int activityId,string email,string voteType)
+        [HttpPatch("AddVote")]
+        public async Task<IActionResult> AddVote(int activityId,string email,string voteType)
         {
-            var success = await _activityServices.UpdateVoteAsync(activityId, email,voteType);
+            var success = await _activityServices.AddVoteAsync(activityId, email,voteType);
             if (success)
-            return Ok(new {Success="Vote updated"});
+            return Ok(new {Success="Vote added"});
             else
-            return BadRequest(new {Message ="Error updating Votes.Activity Id doesn't exist or Invalid VoteType, use only yes or no values"});
+            return BadRequest(new {Message ="Error adding a vote.Activity Id doesn't exist or Invalid VoteType, use only yes or no values"});
         }
        
+        [HttpPatch("RemoveVote")]
+        public async Task<IActionResult> RemoveVote(int activityId,string email,string voteType)
+        {
+            var success = await _activityServices.RemoveVoteAsync(activityId, email,voteType);
+            if (success)
+            return Ok(new {Success="Vote removed"});
+            else
+            return BadRequest(new {Message ="Error removing a vote.Activity Id doesn't exist or Invalid VoteType, use only yes or no values"});
+        }
     }
 }

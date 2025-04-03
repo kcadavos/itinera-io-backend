@@ -44,8 +44,10 @@ builder.Services.AddAuthentication(options => {
         ValidateLifetime = true, //check if token is not expired
         ValidateIssuerSigningKey = true, // Check the tokens signature is valid
         
-        ValidIssuer = "http://localhost:5000/",
-        ValidAudience= "http://localhost:5000/",
+        // ValidIssuer = "https://itineraioapi-cqapgsgcbschc7hu.westus-01.azurewebsites.net/",
+        // ValidAudience= "https://itineraioapi-cqapgsgcbschc7hu.westus-01.azurewebsites.net/",
+        ValidIssuer = "http://localhost:5000",
+        ValidAudience= "http://localhost:5000",
         IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(secretKey))
     };
 });

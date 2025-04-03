@@ -1,5 +1,6 @@
 using itinera_io_backend.Models;
 using itinera_io_backend.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
 
@@ -7,6 +8,7 @@ namespace itinera_io_backend.Controllers
 {
     [ApiController]
     [Route("[controller]")]
+    // [Authorize]
     public class TripController : ControllerBase
     {
         private readonly TripServices _tripServices;
@@ -17,6 +19,7 @@ namespace itinera_io_backend.Controllers
         }
 
         [HttpGet("GetTripsByEmail/{email}")]
+
         public async Task<IActionResult> GetTripsByEmail(string email)
         {
             var trips = await _tripServices.GetTripsByEmailAsync(email);
@@ -34,13 +37,13 @@ namespace itinera_io_backend.Controllers
                 return BadRequest(new { Message = "Trip  not added." });
         }
 
-        [HttpPut("CloseVoting")]
-        public async Task<IActionResult> CloseVoting(int tripId)
+        [HttpPut("UpdateVotingOpen")]
+        public async Task<IActionResult> UpdateVotingOpen(int tripId, bool voteOpen)
         {
-            var success = await _tripServices.CloseVotingAsync(tripId);
-            if (success) return Ok(new { Success = "Trip voting closed" });
+            var success = await _tripServices.UpdateVotingOpenAsync(tripId, voteOpen);
+            if (success) return Ok(new { Success = "Trip vote open is updated" });
             else
-                return BadRequest(new { Message = "Trip does not exist" });
+                return BadRequest(new { Message = "Trip does not exist or trip vote open is not updated" });
         }
 
     }

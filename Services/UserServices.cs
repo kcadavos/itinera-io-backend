@@ -92,8 +92,10 @@ namespace itinera_io_backend.Services
             var signingCredentials = new SigningCredentials(secretKey, SecurityAlgorithms.HmacSha256);
 
             var tokenOptions = new JwtSecurityToken(
-              issuer: "http://localhost:5000/",
-              audience: "http://localhost:5000/",
+            //   issuer: "https://itineraioapi-cqapgsgcbschc7hu.westus-01.azurewebsites.net/",
+            //   audience: "https://itineraioapi-cqapgsgcbschc7hu.westus-01.azurewebsites.net/",
+                issuer: "http://localhost:5000",
+                audience: "http://localhost:5000",
               claims: claims,
               signingCredentials: signingCredentials
             );

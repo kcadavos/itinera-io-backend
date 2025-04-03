@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("itinera-io-backend")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+d8aa85ec891473e1ea812cbe0cfa76dad8c2a8f6")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+6c424dd5bc801e20a2d18d3746ce12af78f2ef47")]
 [assembly: System.Reflection.AssemblyProductAttribute("itinera-io-backend")]
 [assembly: System.Reflection.AssemblyTitleAttribute("itinera-io-backend")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

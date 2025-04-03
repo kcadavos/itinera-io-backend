@@ -27,13 +27,13 @@ namespace itinera_io_backend.Services
             return await _dataContext.SaveChangesAsync()!=0;
         }
 
-        public async Task<bool> CloseVotingAsync (int tripId)
+        public async Task<bool> UpdateVotingOpenAsync (int tripId, bool voteOpen)
         {
             var trip =await _dataContext.Trip.FindAsync(tripId);
             if (trip ==null) 
             return false;
             else{
-                trip.isVotingOpen = false;
+                trip.isVotingOpen = voteOpen;
                 return await _dataContext.SaveChangesAsync()!=0;
             }
         }
