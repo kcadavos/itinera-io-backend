@@ -12,6 +12,9 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddScoped<UserServices>();
 builder.Services.AddScoped<TripServices>();
+builder.Services.AddScoped<ActivityServices>();
+builder.Services.AddScoped<ItineraryServices>();
+
 
 var connectionString = builder.Configuration.GetConnectionString("DatabaseConnection");
 builder.Services.AddDbContext<DataContext>(options=>options.UseSqlServer(connectionString));
@@ -59,7 +62,7 @@ if (app.Environment.IsDevelopment())
 app.UseSwagger();
 app.UseSwaggerUI(c =>
 {
-    c.SwaggerEndpoint("/swagger/v1/swagger.json", "My API V1");
+    c.SwaggerEndpoint("/swagger/v1/swagger.json", "Itinera V1");
     c.RoutePrefix = string.Empty; // Loads Swagger at the root URL
 });
 

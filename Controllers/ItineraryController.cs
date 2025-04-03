@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace itinera_io_backend.Controllers
 {   [ApiController]
     [Route("[controller]")]
-    public class ItineraryController
+    public class ItineraryController: ControllerBase
     {
         private readonly ItineraryServices _itineraryServices;
 

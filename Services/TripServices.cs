@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography.X509Certificates;
 using System.Threading.Tasks;
 using itinera_io_backend.Context;
 using itinera_io_backend.Models;
@@ -24,6 +25,17 @@ namespace itinera_io_backend.Services
         {
             await _dataContext.Trip.AddAsync(trip);
             return await _dataContext.SaveChangesAsync()!=0;
+        }
+
+        public async Task<bool> CloseVotingAsync (int tripId)
+        {
+            var trip =await _dataContext.Trip.FindAsync(tripId);
+            if (trip ==null) 
+            return false;
+            else{
+                trip.isVotingOpen = false;
+                return await _dataContext.SaveChangesAsync()!=0;
+            }
         }
         
     }

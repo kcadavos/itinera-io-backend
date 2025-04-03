@@ -11,27 +11,36 @@ namespace itinera_io_backend.Controllers
     {
         private readonly TripServices _tripServices;
 
-        public  TripController (TripServices tripServices)
+        public TripController(TripServices tripServices)
         {
-            _tripServices= tripServices;
+            _tripServices = tripServices;
         }
 
         [HttpGet("GetTripsByEmail/{email}")]
         public async Task<IActionResult> GetTripsByEmail(string email)
         {
             var trips = await _tripServices.GetTripsByEmailAsync(email);
-            if (trips!=null) return Ok(trips);
+            if (trips != null) return Ok(trips);
             else
-            return BadRequest(new {Message ="No trips"});
+                return BadRequest(new { Message = "No trips" }); // does not display , it always display an empty List
         }
 
-        [HttpPost ("AddTrip")]
+        [HttpPost("AddTrip")]
         public async Task<IActionResult> AddTrip(TripModel trip)
         {
-        var success = await _tripServices.AddTripAsync(trip);
-        if (success) return Ok(new {Success = true});
-        else
-        return BadRequest(new{Message ="Trip was not added."});
+            var success = await _tripServices.AddTripAsync(trip);
+            if (success) return Ok(new { Success = true });
+            else
+                return BadRequest(new { Message = "Trip  not added." });
+        }
+
+        [HttpPut("CloseVoting")]
+        public async Task<IActionResult> CloseVoting(int tripId)
+        {
+            var success = await _tripServices.CloseVotingAsync(tripId);
+            if (success) return Ok(new { Success = "Trip voting closed" });
+            else
+                return BadRequest(new { Message = "Trip does not exist" });
         }
 
     }
