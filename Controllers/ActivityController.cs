@@ -35,5 +35,16 @@ namespace itinera_io_backend.Controllers
            return BadRequest (new {Message ="activity not added"});
 
         }
+
+        [HttpPatch("UpdateVote")]
+        public async Task<IActionResult> UpdateVoteYes(int activityId,string email,string voteType)
+        {
+            var success = await _activityServices.UpdateVoteAsync(activityId, email,voteType);
+            if (success)
+            return Ok(new {Success="Vote updated"});
+            else
+            return BadRequest(new {Message ="Error updating Votes.Activity Id doesn't exist or Invalid VoteType, use only yes or no values"});
+        }
+       
     }
 }

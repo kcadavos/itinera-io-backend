@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using itinera_io_backend.Context;
 using itinera_io_backend.Models;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.VisualBasic;
 
 namespace itinera_io_backend.Services
 {
@@ -23,6 +24,16 @@ namespace itinera_io_backend.Services
         {
             await _dataContext.Activity.AddAsync(activity);
             return await _dataContext.SaveChangesAsync()!=0;
+        }
+
+        public async Task<bool> UpdateVoteAsync(int activityId,string email,string voteType)
+        {
+            var trip = await _dataContext.Activity.FindAsync(activityId);
+           
+            if (voteType.ToLower()=="yes") trip.VoteYes.Add(email);
+            if (voteType.ToLower() =="no") trip.VoteNo.Add(email);
+            return await _dataContext.SaveChangesAsync()!=0;
+           
         }
     }
 }
