@@ -1,0 +1,102 @@
+[
+    {
+      "id": 0,
+      "tripId": 21,
+      "activity": "City Walking Tour",
+      "category": "explore",
+      "address": "Central Square",
+      "details": "A guided tour through the historic downtown area",
+      "voteYes": [],
+      "voteNo": []
+    },
+    {
+      "id": 0,
+      "tripId": 21,
+      "activity": "Museum Visit",
+      "category": "culture",
+      "address": "45 Museum Ave",
+      "details": "Explore local art and history at the national museum",
+      "voteYes": [],
+      "voteNo": []
+    },
+    {
+      "id": 0,
+      "tripId": 21,
+      "activity": "Coffee Break",
+      "category": "eat",
+      "address": "123 Coffee Street",
+      "details": "Take a break and enjoy artisan coffee downtown",
+      "voteYes": [],
+      "voteNo": []
+    },
+    {
+      "id": 0,
+      "tripId": 21,
+      "activity": "Beach Volleyball",
+      "category": "sport",
+      "address": "Sunset Beach",
+      "details": "Casual volleyball match in the afternoon sun",
+      "voteYes": [],
+      "voteNo": []
+    },
+    {
+      "id": 0,
+      "tripId": 21,
+      "activity": "Boat Ride",
+      "category": "relax",
+      "address": "Harbor Dock 7",
+      "details": "Relaxing boat ride around the coastline",
+      "voteYes": [],
+      "voteNo": []
+    },
+    {
+      "id": 0,
+      "tripId": 21,
+      "activity": "Cooking Class",
+      "category": "learn",
+      "address": "Kitchen Studio, 8th Ave",
+      "details": "Learn to cook a traditional local dish",
+      "voteYes": [],
+      "voteNo": []
+    },
+    {
+      "id": 0,
+      "tripId": 21,
+      "activity": "Hiking Trip",
+      "category": "adventure",
+      "address": "Eagle Trailhead",
+      "details": "Moderate hike with scenic views and photo stops",
+      "voteYes": [],
+      "voteNo": []
+    },
+    {
+      "id": 0,
+      "tripId": 21,
+      "activity": "Dinner at Rooftop Restaurant",
+      "category": "eat",
+      "address": "Skyline Tower",
+      "details": "Evening dinner with panoramic city views",
+      "voteYes": [],
+      "voteNo": []
+    },
+    {
+      "id": 0,
+      "tripId": 21,
+      "activity": "Live Music Night",
+      "category": "entertainment",
+      "address": "Jazz Bar, Main Street",
+      "details": "Local bands performing live jazz and blues",
+      "voteYes": [],
+      "voteNo": []
+    },
+    {
+      "id": 0,
+      "tripId": 21,
+      "activity": "Local Market Visit",
+      "category": "shopping",
+      "address": "Old Town Market",
+      "details": "Browse handcrafted goods and taste local snacks",
+      "voteYes": [],
+      "voteNo": []
+    }
+  ]

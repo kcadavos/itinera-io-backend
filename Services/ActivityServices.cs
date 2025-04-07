@@ -27,23 +27,28 @@ namespace itinera_io_backend.Services
         }
 
         // adds the user  to Vote Yes Or No List
-        public async Task<bool> AddVoteAsync(int activityId,string email,string voteType)
+        public async Task<bool> AddVoteAsync(ActivityVoteDTO activityVote)
         {
-            var trip = await _dataContext.Activity.FindAsync(activityId);
-           
-            if (voteType.ToLower()=="yes") trip.VoteYes.Add(email);
-            if (voteType.ToLower() =="no") trip.VoteNo.Add(email);
+            var trip = await _dataContext.Activity.FindAsync(activityVote.ActivityId);
+            if (trip==null)
+            return false;
+            else{
+            if (activityVote.VoteType.ToLower()=="yes" && !trip.VoteYes.Contains(activityVote.UserId))
+                 trip.VoteYes.Add(activityVote.UserId);
+            if (activityVote.VoteType.ToLower() =="no" && !trip.VoteNo.Contains(activityVote.UserId))
+                 trip.VoteNo.Add(activityVote.UserId);
             return await _dataContext.SaveChangesAsync()!=0;
+            }
            
         }
 
         // removes the user  to Vote Yes Or No List
-        public async Task<bool> RemoveVoteAsync(int activityId,string email,string voteType)
+        public async Task<bool> RemoveVoteAsync(ActivityVoteDTO activityVote)
         {
-            var trip = await _dataContext.Activity.FindAsync(activityId);
+            var trip = await _dataContext.Activity.FindAsync(activityVote.ActivityId);
            
-            if (voteType.ToLower()=="yes") trip.VoteYes.Remove(email);
-            if (voteType.ToLower() =="no") trip.VoteNo.Remove(email);
+            if (activityVote.VoteType.ToLower()=="yes") trip.VoteYes.Remove(activityVote.UserId);
+            if (activityVote.VoteType.ToLower() =="no") trip.VoteNo.Remove(activityVote.UserId);
             return await _dataContext.SaveChangesAsync()!=0;
            
         }

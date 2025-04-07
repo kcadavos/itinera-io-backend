@@ -37,9 +37,9 @@ namespace itinera_io_backend.Controllers
         }
 
         [HttpPatch("AddVote")]
-        public async Task<IActionResult> AddVote(int activityId,string email,string voteType)
+        public async Task<IActionResult> AddVote([FromBody] ActivityVoteDTO activityVote)
         {
-            var success = await _activityServices.AddVoteAsync(activityId, email,voteType);
+            var success = await _activityServices.AddVoteAsync(activityVote);
             if (success)
             return Ok(new {Success="Vote added"});
             else
@@ -47,9 +47,9 @@ namespace itinera_io_backend.Controllers
         }
        
         [HttpPatch("RemoveVote")]
-        public async Task<IActionResult> RemoveVote(int activityId,string email,string voteType)
+        public async Task<IActionResult> RemoveVote([FromBody] ActivityVoteDTO activityVote)
         {
-            var success = await _activityServices.RemoveVoteAsync(activityId, email,voteType);
+            var success = await _activityServices.RemoveVoteAsync(activityVote);
             if (success)
             return Ok(new {Success="Vote removed"});
             else
