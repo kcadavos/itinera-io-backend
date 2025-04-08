@@ -19,7 +19,12 @@ namespace itinera_io_backend.Services
         }
 
         //get trips based on the user email
-        public async Task<List <TripModel>> GetTripsByEmailAsync (string email)=> await _dataContext.Trip.Where(trip => trip.Participants.Contains(email)).ToListAsync();
+        public async Task<List <TripModel>> GetTripsByUserIdAsync (int id)
+        {
+
+           return await _dataContext.Trip.Where(trip => trip.ParticipantsId != null && trip.ParticipantsId.Contains(id) || trip.OwnerId== id).ToListAsync();
+        
+        }
 
         public async Task<bool> AddTripAsync (TripModel trip)
         {
@@ -27,16 +32,26 @@ namespace itinera_io_backend.Services
             return await _dataContext.SaveChangesAsync()!=0;
         }
 
-        public async Task<bool> UpdateVotingOpenAsync (int tripId, bool voteOpen)
+        public async Task<bool> UpdateVotingStatusAsync (TripStatusDTO tripVoteStatus)
         {
-            var trip =await _dataContext.Trip.FindAsync(tripId);
-            if (trip ==null) 
+            var trip =await _dataContext.Trip.FindAsync(tripVoteStatus.TripId);
+            
+            if (trip ==null ) 
             return false;
             else{
-                trip.isVotingOpen = voteOpen;
+                trip.isVotingOpen = tripVoteStatus.IsVoteOpen;
                 return await _dataContext.SaveChangesAsync()!=0;
+                    
             }
         }
+
+        public async Task<TripModel> GetTripInfo (int tripId)
+        {
+            return await _dataContext.Trip.FindAsync(tripId);
+            
+    
+        }
+     
         
     }
 }

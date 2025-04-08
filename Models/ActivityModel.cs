@@ -14,9 +14,9 @@ namespace itinera_io_backend.Models
 
         public string? Details{get;set;}
 
-        public List<string>? VoteYes{get;set;}
+        public List<int>? VoteYes{get;set;}
 
-        public List<string>? VoteNo{get;set;}
+        public List<int>? VoteNo{get;set;}
 
     }
 }

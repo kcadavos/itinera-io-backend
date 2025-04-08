@@ -18,14 +18,17 @@ namespace itinera_io_backend.Controllers
             _tripServices = tripServices;
         }
 
-        [HttpGet("GetTripsByEmail/{email}")]
+        [HttpGet("GetTripsByUserId/{userId}")]
 
-        public async Task<IActionResult> GetTripsByEmail(string email)
+        public async Task<IActionResult> GetTripsByUserId(int userId)
         {
-            var trips = await _tripServices.GetTripsByEmailAsync(email);
-            if (trips != null) return Ok(trips);
+            var trips = await _tripServices.GetTripsByUserIdAsync(userId);
+            if (trips != null && trips.Any()) // checks if the list contains anything
+                return Ok(trips);
             else
-                return BadRequest(new { Message = "No trips" }); // does not display , it always display an empty List
+            {
+                return BadRequest(new { Message = "No trips" });
+            }
         }
 
         [HttpPost("AddTrip")]
@@ -37,13 +40,13 @@ namespace itinera_io_backend.Controllers
                 return BadRequest(new { Message = "Trip  not added." });
         }
 
-        [HttpPut("UpdateVotingOpen")]
-        public async Task<IActionResult> UpdateVotingOpen(int tripId, bool voteOpen)
+        [HttpPatch("UpdateVotingStatus")]
+        public async Task<IActionResult> UpdateVotingOpen([FromBody] TripStatusDTO tripVoteStatus)
         {
-            var success = await _tripServices.UpdateVotingOpenAsync(tripId, voteOpen);
+            var success = await _tripServices.UpdateVotingStatusAsync(tripVoteStatus);
             if (success) return Ok(new { Success = "Trip vote open is updated" });
             else
-                return BadRequest(new { Message = "Trip does not exist or trip vote open is not updated" });
+                return BadRequest(new { Message = "Trip does not exist   or trip vote open is not updated" });
         }
 
     }

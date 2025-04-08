@@ -16,15 +16,48 @@ namespace itinera_io_backend.Controllers
             _activityServices = activityServices;
         }
 
-        [HttpGet("GetActivitiesByTripId/{id}")]
-        public async Task<IActionResult> GetActivitiesByTripId(int id)
+        [HttpGet("GetActivities/{tripId}")]
+        public async Task<IActionResult> GetActivities(int tripId)
         {
-            var activities = await _activityServices.GetActivitiesByTripIdAsync(id);
-            if (activities !=null)
+            var activities = await _activityServices.GetActivitiesByTripIdAsync(tripId);
+            if (activities !=null && activities.Any())
                 return Ok(activities);
-               
+            else
                 return BadRequest (new {Message="no activities found"});
 
+        }
+
+        [HttpGet("GetUndecidedActivities/{userId}/{tripId}")]
+        public async Task<IActionResult> GetUndecidedActivitiesByTripIdAndUserId(int tripId, int userId)
+        {
+            var activities = await _activityServices.GetUndecidedActivitiesByTripIdAndUserIdAsync(tripId,userId);
+
+            if (activities !=null && activities.Any())
+                return Ok (activities);
+            else
+                return BadRequest (new {Message="no undecided activities found"}); 
+        }
+
+        [HttpGet("GetLikedActivities/{userId}/{tripId}")]
+        public async Task<IActionResult> GetLikedActivitiesByTripIdAndUserId(int tripId, int userId)
+        {
+            var activities = await _activityServices.GetLikedActivitiesByTripIdAndUserIdAsync(tripId,userId);
+
+            if (activities !=null && activities.Any())
+                return Ok (activities);
+            else
+                return BadRequest (new {Message="no liked activities found"}); 
+        }
+
+        [HttpGet("GetDislikedActivities/{userId}/{tripId}")]
+        public async Task<IActionResult> GetDislikedActivitiesByTripIdAndUserId(int tripId, int userId)
+        {
+            var activities = await _activityServices.GetDisLikedActivitiesByTripIdAndUserIdAsync(tripId,userId);
+
+            if (activities !=null && activities.Any())
+                return Ok (activities);
+            else
+                return BadRequest (new {Message="no disliked activities found"}); 
         }
 
         [HttpPost("AddActivity")]
@@ -37,9 +70,9 @@ namespace itinera_io_backend.Controllers
         }
 
         [HttpPatch("AddVote")]
-        public async Task<IActionResult> AddVote(int activityId,string email,string voteType)
+        public async Task<IActionResult> AddVote([FromBody] ActivityVoteDTO activityVote)
         {
-            var success = await _activityServices.AddVoteAsync(activityId, email,voteType);
+            var success = await _activityServices.AddVoteAsync(activityVote);
             if (success)
             return Ok(new {Success="Vote added"});
             else
@@ -47,13 +80,44 @@ namespace itinera_io_backend.Controllers
         }
        
         [HttpPatch("RemoveVote")]
-        public async Task<IActionResult> RemoveVote(int activityId,string email,string voteType)
+        public async Task<IActionResult> RemoveVote([FromBody] ActivityVoteDTO activityVote)
         {
-            var success = await _activityServices.RemoveVoteAsync(activityId, email,voteType);
+            var success = await _activityServices.RemoveVoteAsync(activityVote);
             if (success)
             return Ok(new {Success="Vote removed"});
             else
             return BadRequest(new {Message ="Error removing a vote.Activity Id doesn't exist or Invalid VoteType, use only yes or no values"});
+        }
+
+        [HttpGet("GetActivityVoteCount/{tripId}")]
+        public async Task<IActionResult> GetActivityVoteCount(int tripId )
+        {
+            var activities = await _activityServices.GetActivityVoteCountByTripIdAsync(tripId);
+            if (activities!=null)
+            return Ok(activities);
+            else 
+            return BadRequest (new {Message = "Invalid Trip Id"});
+        }
+
+
+        [HttpGet("GenerateItinerary/{tripId}")]
+        public async Task<IActionResult> GenerateItinerary(int tripId )
+        {
+            var activities = await _activityServices.GenerateItineraryAsync(tripId);
+            if (activities!=null)
+            return Ok(activities);
+            else 
+            return BadRequest (new {Message = "Invalid Trip Id"});
+        }
+
+        [HttpGet("GetActivityDetailsFromItinerary/{tripId}")]
+        public async Task<IActionResult> GetActivityDetailsFromItinerary(int tripId)
+        {
+            var itineraryDetails = await _activityServices.GetActivityDetailsFromItineraryAsync(tripId);
+            if (itineraryDetails!=null && itineraryDetails.Any())
+            return Ok(itineraryDetails);
+            else 
+                return BadRequest (new {Message ="intinerary details not retrieved"});
         }
     }
 }

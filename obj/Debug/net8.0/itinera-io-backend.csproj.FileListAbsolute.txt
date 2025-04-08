@@ -136,3 +136,4 @@
 /Users/karen/Desktop/Codestack/Level3/itinera-io-backend/obj/Debug/net8.0/itinera-io-backend.pdb
 /Users/karen/Desktop/Codestack/Level3/itinera-io-backend/obj/Debug/net8.0/itinera-io-backend.genruntimeconfig.cache
 /Users/karen/Desktop/Codestack/Level3/itinera-io-backend/obj/Debug/net8.0/ref/itinera-io-backend.dll
+/Users/karen/Desktop/Codestack/Level3/itinera-io-backend/bin/Debug/net8.0/TestData/Activity.json
