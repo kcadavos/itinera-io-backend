@@ -1,3 +1,0 @@
-﻿<Project>
-  <Import Project="../build/itinera-io-backend.props" />
-</Project>
