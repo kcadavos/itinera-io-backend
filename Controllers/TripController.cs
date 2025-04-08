@@ -24,7 +24,7 @@ namespace itinera_io_backend.Controllers
         {
             var trips = await _tripServices.GetTripsByUserIdAsync(userId);
             if (trips != null) return Ok(trips);
-            else
+            else 
                 return BadRequest(new { Message = "No trips" }); // does not display , it always display an empty List
         }
 

@@ -36,6 +36,7 @@ namespace itinera_io_backend.Services
             else{
                 trip.isVotingOpen = tripVoteStatus.IsVoteOpen;
                 return await _dataContext.SaveChangesAsync()!=0;
+                    
             }
         }
 
