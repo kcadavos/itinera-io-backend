@@ -19,7 +19,12 @@ namespace itinera_io_backend.Services
         }
 
         //get trips based on the user email
-        public async Task<List <TripModel>> GetTripsByUserIdAsync (int id)=> await _dataContext.Trip.Where(trip => trip.ParticipantsId != null && trip.ParticipantsId.Contains(id) || trip.OwnerId== id).ToListAsync();
+        public async Task<List <TripModel>> GetTripsByUserIdAsync (int id)
+        {
+
+           return await _dataContext.Trip.Where(trip => trip.ParticipantsId != null && trip.ParticipantsId.Contains(id) || trip.OwnerId== id).ToListAsync();
+        
+        }
 
         public async Task<bool> AddTripAsync (TripModel trip)
         {
@@ -40,7 +45,7 @@ namespace itinera_io_backend.Services
             }
         }
 
-        
+     
         
     }
 }

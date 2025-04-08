@@ -23,9 +23,12 @@ namespace itinera_io_backend.Controllers
         public async Task<IActionResult> GetTripsByUserId(int userId)
         {
             var trips = await _tripServices.GetTripsByUserIdAsync(userId);
-            if (trips != null) return Ok(trips);
-            else 
-                return BadRequest(new { Message = "No trips" }); // does not display , it always display an empty List
+            if (trips != null && trips.Any()) // checks if the list contains anything
+                return Ok(trips);
+            else
+            {
+                return BadRequest(new { Message = "No trips" });
+            }
         }
 
         [HttpPost("AddTrip")]
@@ -43,7 +46,7 @@ namespace itinera_io_backend.Controllers
             var success = await _tripServices.UpdateVotingStatusAsync(tripVoteStatus);
             if (success) return Ok(new { Success = "Trip vote open is updated" });
             else
-                return BadRequest(new { Message = "Trip does not exist  trip vote open is not updated" });
+                return BadRequest(new { Message = "Trip does not exist   or trip vote open is not updated" });
         }
 
     }
