@@ -89,35 +89,6 @@ namespace itinera_io_backend.Controllers
             return BadRequest(new {Message ="Error removing a vote.Activity Id doesn't exist or Invalid VoteType, use only yes or no values"});
         }
 
-        [HttpGet("GetActivityVoteCount/{tripId}")]
-        public async Task<IActionResult> GetActivityVoteCount(int tripId )
-        {
-            var activities = await _activityServices.GetActivityVoteCountByTripIdAsync(tripId);
-            if (activities!=null)
-            return Ok(activities);
-            else 
-            return BadRequest (new {Message = "Invalid Trip Id"});
-        }
-
-
-        [HttpGet("GenerateItinerary/{tripId}")]
-        public async Task<IActionResult> GenerateItinerary(int tripId )
-        {
-            var activities = await _activityServices.GenerateItineraryAsync(tripId);
-            if (activities!=null)
-            return Ok(activities);
-            else 
-            return BadRequest (new {Message = "Invalid Trip Id"});
-        }
-
-        [HttpGet("GetActivityDetailsFromItinerary/{tripId}")]
-        public async Task<IActionResult> GetActivityDetailsFromItinerary(int tripId)
-        {
-            var itineraryDetails = await _activityServices.GetActivityDetailsFromItineraryAsync(tripId);
-            if (itineraryDetails!=null && itineraryDetails.Any())
-            return Ok(itineraryDetails);
-            else 
-                return BadRequest (new {Message ="intinerary details not retrieved"});
-        }
+      
     }
 }
