@@ -45,6 +45,12 @@ namespace itinera_io_backend.Services
             }
         }
 
+        public async Task<TripModel> GetTripInfo (int tripId)
+        {
+            return await _dataContext.Trip.FindAsync(tripId);
+            
+    
+        }
      
         
     }
