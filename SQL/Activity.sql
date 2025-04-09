@@ -1,6 +1,8 @@
 Select * from Activity;
 
 delete from Activity where Id in (11,12);
+
+
 INSERT INTO Activity ( tripId, activity, category, address, details, voteYes, voteNo)
 VALUES
 ( 21, 'City Walking Tour', 'explore', '123 Main St', 'A guided tour through the historic downtown area', '[]', '[]'),
