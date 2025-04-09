@@ -1,3 +1,21 @@
+# Build results
+[Dd]ebug/
+[Rr]elease/
+x64/
+x86/
+build/
+bld/
+[Bb]in/
+[Oo]bj/
+
+# Visual Studio debug files
+*.pdb
+*.cache
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+
 # Ignore User Secrets folder (for ASP.NET Core)
 secrets.json
 

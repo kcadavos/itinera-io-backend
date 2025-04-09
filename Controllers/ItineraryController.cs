@@ -9,9 +9,10 @@ namespace itinera_io_backend.Controllers
     {
         private readonly ItineraryServices _itineraryServices;
 
-        public ItineraryController (ItineraryServices itineraryServices)
+        public ItineraryController (ItineraryServices itineraryServices, TripServices tripService)
         {
             _itineraryServices = itineraryServices;
+     
         }
 
         [HttpGet("GetItinerariesByTripId/{tripId}")]
@@ -32,6 +33,39 @@ namespace itinera_io_backend.Controllers
                 return Ok(new {Success=true});
             else 
                 return BadRequest (new {Message ="itinerary not added"});
+        }
+
+        [HttpGet("GenerateAndSaveItinerary/{tripId}")]
+        public async Task<IActionResult> GenerateItinerary(int tripId )
+        {
+            var success = await _itineraryServices.GenerateAndSaveItineraryAsync(tripId);
+            if (success!=null)
+            return Ok();
+            else 
+            return BadRequest (new {Message = "Invalid Trip Id"});
+        }
+
+          [HttpGet("GetActivityVoteCount/{tripId}")]
+        public async Task<IActionResult> GetActivityVoteCount(int tripId )
+        {
+            var activities = await _itineraryServices.GetActivityVoteCountByTripIdAsync(tripId);
+            if (activities!=null)
+            return Ok(activities);
+            else 
+            return BadRequest (new {Message = "Invalid Trip Id"});
+        }
+
+
+ 
+
+        [HttpGet("GetActivityDetailsFromItinerary/{tripId}")]
+        public async Task<IActionResult> GetActivityDetailsFromItinerary(int tripId)
+        {
+            var itineraryDetails = await _itineraryServices.GetActivityDetailsFromItineraryAsync(tripId);
+            if (itineraryDetails!=null && itineraryDetails.Any())
+            return Ok(itineraryDetails);
+            else 
+                return BadRequest (new {Message ="intinerary details not retrieved"});
         }
     }
 }

@@ -1,5 +1,6 @@
 select * From Trip;
 
+
 Update Trip set EndDate = '2025-06-02' where id=21;
 -- Insert Data for Trip 1 (Paris)
 INSERT INTO Trip
