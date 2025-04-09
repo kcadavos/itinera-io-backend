@@ -35,12 +35,12 @@ namespace itinera_io_backend.Controllers
                 return BadRequest (new {Message ="itinerary not added"});
         }
 
-        [HttpGet("GenerateItinerary/{tripId}")]
+        [HttpGet("GenerateAndSaveItinerary/{tripId}")]
         public async Task<IActionResult> GenerateItinerary(int tripId )
         {
-            var activities = await _itineraryServices.GenerateItineraryAsync(tripId);
-            if (activities!=null)
-            return Ok(activities);
+            var success = await _itineraryServices.GenerateAndSaveItineraryAsync(tripId);
+            if (success!=null)
+            return Ok();
             else 
             return BadRequest (new {Message = "Invalid Trip Id"});
         }

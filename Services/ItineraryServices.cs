@@ -32,11 +32,11 @@ namespace itinera_io_backend.Services
 
         }
         
-        // for generating itinerar
+        // for generating itinerary
            private async Task<int> GetTripDurationInDays(int tripId)
         {
            var trip=  await _dataContext.Trip.SingleOrDefaultAsync(trip=> trip.Id==tripId);
-            return ((trip.EndDate.DayNumber - trip.StartDate.DayNumber) + 1);
+            return trip.EndDate.DayNumber - trip.StartDate.DayNumber + 1;
         }
 
            public async Task <List <ActivityVoteCountDTO>> GetActivityVoteCountByTripIdAsync(int tripId)
@@ -63,7 +63,7 @@ namespace itinera_io_backend.Services
 
      
      
-         public async Task <List<ItineraryModel>> GenerateItineraryAsync (int tripId)
+         public async Task <bool> GenerateAndSaveItineraryAsync (int tripId)
        {
    
             const int numberOfActivitiesPerDay =3;  //3 is the total count of activities per day
@@ -91,16 +91,28 @@ namespace itinera_io_backend.Services
                   itineraryItem.SecondActivityId = topActivities[i*numberOfActivitiesPerDay+1].ActivityId;
                   itineraryItem.ThirdActivityId = topActivities[i*numberOfActivitiesPerDay+2].ActivityId;
                   itineraryList.Add(itineraryItem);
+
+                  if (!await AddItineraryAsync(itineraryItem))
+                    return false;
+
             }
 
-            return itineraryList;
+            // close the voting once itinerary is generated
+            if (!await _tripService.UpdateVotingStatusAsync(new TripStatusDTO 
+            {TripId = tripId,
+            IsVoteOpen=false}))
+                return false; // update voting failed
+
+            return true;
            
         }
+
+    
         
       
-  public async Task<List<ItineraryActivityDetailDTO>> GetActivityDetailsFromItineraryAsync(int tripId)
+        public async Task<List<ItineraryActivityDetailDTO>> GetActivityDetailsFromItineraryAsync(int tripId)
         {
-            List <ItineraryModel> generatedItinerary = await GenerateItineraryAsync(tripId);
+            List <ItineraryModel> generatedItinerary = await GetItinerariesByTripIdAsync(tripId);
             TripModel tripDetail = await _tripService.GetTripInfo(tripId);
 
             // List <ActivityModel> itineraryActivityDetailList = new ();
