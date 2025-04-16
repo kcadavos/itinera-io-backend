@@ -8,6 +8,7 @@ namespace itinera_io_backend.Controllers
 {  
     [ApiController]
     [Route("[controller]")]
+    [Authorize]
    
     public class TripController : ControllerBase
     {
@@ -18,7 +19,6 @@ namespace itinera_io_backend.Controllers
             _tripServices = tripServices;
         }
 
-        [Authorize]
         [HttpGet("GetTripsByUserId/{userId}")]
         public async Task<IActionResult> GetTripsByUserId(int userId)
         {
