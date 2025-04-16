@@ -26,9 +26,8 @@ namespace itinera_io_backend.Controllers
             if (trips != null && trips.Any()) // checks if the list contains anything
                 return Ok(trips);
             else
-            {
-                return BadRequest(new{Message="No trips available"});
-            }
+               return BadRequest(new{ Message = "Trip  not added." });
+            
         }
 
         [HttpPost("AddTrip")]
