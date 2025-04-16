@@ -94,9 +94,11 @@ namespace itinera_io_backend.Services
             var tokenOptions = new JwtSecurityToken(
               issuer: "https://itineraioapi-cqapgsgcbschc7hu.westus-01.azurewebsites.net/",
               audience: "https://itineraioapi-cqapgsgcbschc7hu.westus-01.azurewebsites.net/",
+              
                 // issuer: "http://localhost:5000",
                 // audience: "http://localhost:5000",
               claims: claims,
+                expires: DateTime.Now.AddMinutes(30),
               signingCredentials: signingCredentials
             );
 
