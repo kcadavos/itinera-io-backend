@@ -5,10 +5,10 @@ using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
 
 namespace itinera_io_backend.Controllers
-{
+{  
     [ApiController]
     [Route("[controller]")]
-    // [Authorize]
+   
     public class TripController : ControllerBase
     {
         private readonly TripServices _tripServices;
@@ -18,8 +18,8 @@ namespace itinera_io_backend.Controllers
             _tripServices = tripServices;
         }
 
+        [Authorize]
         [HttpGet("GetTripsByUserId/{userId}")]
-
         public async Task<IActionResult> GetTripsByUserId(int userId)
         {
             var trips = await _tripServices.GetTripsByUserIdAsync(userId);
