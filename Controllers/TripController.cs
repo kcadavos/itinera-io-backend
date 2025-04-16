@@ -27,7 +27,7 @@ namespace itinera_io_backend.Controllers
                 return Ok(trips);
             else
             {
-                return BadRequest(new={Message="No trips available"});
+                return BadRequest(new{Message="No trips available"});
             }
         }
 
