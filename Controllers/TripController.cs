@@ -39,6 +39,15 @@ namespace itinera_io_backend.Controllers
                 return BadRequest(new { Message = "Trip  not added." });
         }
 
+        [HttpPost("AddTripReturnTripId")]
+        public async Task<IActionResult> AddTripReturnTripId(TripModel trip)
+        {
+            var tripId = await _tripServices.AddTripAsyncReturnTripId(trip);
+            if (tripId>0) return Ok(tripId);
+            else
+                return BadRequest(new { Message = "Trip  not added." });
+        }
+
         [HttpPatch("UpdateVotingStatus")]
         public async Task<IActionResult> UpdateVotingOpen([FromBody] TripStatusDTO tripVoteStatus)
         {

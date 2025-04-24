@@ -32,6 +32,13 @@ namespace itinera_io_backend.Services
             return await _dataContext.SaveChangesAsync()!=0;
         }
 
+           public async Task<int> AddTripAsyncReturnTripId (TripModel trip)
+        {
+            await _dataContext.Trip.AddAsync(trip);
+            var result = await _dataContext.SaveChangesAsync();
+            return result!=0 ? trip.Id : 0;
+        }
+
         public async Task<bool> UpdateVotingStatusAsync (TripStatusDTO tripVoteStatus)
         {
             var trip =await _dataContext.Trip.FindAsync(tripVoteStatus.TripId);
