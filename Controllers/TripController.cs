@@ -57,5 +57,15 @@ namespace itinera_io_backend.Controllers
                 return BadRequest(new { Message = "Trip does not exist   or trip vote open is not updated" });
         }
 
+        [HttpPut("EditTrip")]
+        public async Task<IActionResult> EditTrip([FromBody] TripModel trip)
+        {
+            var success = await _tripServices.EditTripAsync(trip);
+
+            if (success) return Ok(new { Success = true });
+
+            return BadRequest(new { Message = "No trip was edited" });
+        }
+
     }
 }

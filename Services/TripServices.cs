@@ -39,6 +39,19 @@ namespace itinera_io_backend.Services
             return result!=0 ? trip.Id : 0;
         }
 
+        public async Task<bool> EditTripAsync(TripModel trip){
+            var tripToEdit = await GetTripInfo(trip.Id);
+            if(tripToEdit== null) return false;
+
+            tripToEdit.Destination= trip.Destination;
+            tripToEdit.StartDate = trip.StartDate;
+            tripToEdit.EndDate=trip.EndDate;
+            tripToEdit.ParticipantsId= trip.ParticipantsId;
+
+            _dataContext.Trip.Update(tripToEdit);
+           return await _dataContext.SaveChangesAsync()!=0;
+        }
+
         public async Task<bool> UpdateVotingStatusAsync (TripStatusDTO tripVoteStatus)
         {
             var trip =await _dataContext.Trip.FindAsync(tripVoteStatus.TripId);
