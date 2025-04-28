@@ -52,6 +52,19 @@ namespace itinera_io_backend.Controllers
             }
             
         }
+
+        [HttpGet("GetUserInfoById/{id}")]
+        public async Task<IActionResult> GetUserInfoById (int id )
+        {
+        var user = await _userServices.GetUserInfoByIdAsync(id);
+       
+            if (user!=null) return Ok(user);
+            else
+            {
+            return BadRequest(new {Message = "No User Found."});
+            }
+            
+        }
     
     }
 }
