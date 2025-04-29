@@ -107,6 +107,8 @@ namespace itinera_io_backend.Services
 
         private async Task<UserModel> GetUserByUsername(string email) => await _dataContext.User.SingleOrDefaultAsync(user => user.Email == email); //returns  the user that is found
 
+        private async Task<UserModel> GetUserById(int id) => await _dataContext.User.SingleOrDefaultAsync(user => user.Id == id); //returns  the user that is found
+
         private static bool VerifyPassword(string password, string salt, string hash)
         {
             byte[] saltByte = Convert.FromBase64String(salt);
@@ -163,6 +165,26 @@ namespace itinera_io_backend.Services
             
             userToEdit.Name= user.Name;
             userToEdit.Email = user.Email;
+            
+            //no use for update since this is already tracking changes 
+           return await _dataContext.SaveChangesAsync()!=0;
+        }
+
+          public async Task<bool> EditPasswordAsync(ChangePasswordDTO passwordInfo){
+            var userInDB = await GetUserById(passwordInfo.UserId);
+            if (userInDB == null) 
+                return false;
+
+            //check if user entered correct old password
+            if (!VerifyPassword(passwordInfo.OldPassword, userInDB.Salt, userInDB.Hash))
+            {
+                return false;
+            }
+   
+            PasswordDTO newEncryptedPassword = HashPassword(passwordInfo.NewPassword);
+
+            userInDB.Hash = newEncryptedPassword.Hash;
+            userInDB.Salt = newEncryptedPassword.Salt;
             
             //no use for update since this is already tracking changes 
            return await _dataContext.SaveChangesAsync()!=0;

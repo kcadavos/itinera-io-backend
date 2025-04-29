@@ -15,3 +15,12 @@ VALUES
 ( 21, 'Dinner at Rooftop Restaurant', 'eat', 'Skyline Tower', 'Evening dinner with panoramic city views', '[]', '[]'),
 ( 21, 'Live Music Night', 'entertainment', 'Jazz Bar, Main Street', 'Local bands performing live jazz and blues', '[]', '[]'),
 ( 21, 'Local Market Visit', 'shopping', 'Old Town Market', 'Browse handcrafted goods and taste local snacks', '[]', '[]');
+
+
+select * from Activity where TripId=32
+
+
+select * from trip where id=32
+
+
+

@@ -79,6 +79,18 @@ namespace itinera_io_backend.Controllers
 
             return BadRequest(new { Message = "No user info was edited" });
         }
+
+           
+        [HttpPut("EditPassword")]
+        [Authorize] 
+        public async Task<IActionResult> EditPassword([FromBody] ChangePasswordDTO passwordInfo)
+        {
+            var success = await _userServices.EditPasswordAsync(passwordInfo);
+
+            if (success) return Ok(new { Success = true });
+
+            return BadRequest(new { Message = "User password is not edited" });
+        }
     
     }
 }
