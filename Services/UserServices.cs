@@ -153,6 +153,21 @@ namespace itinera_io_backend.Services
 
         }
 
+         public async Task<bool> EditUserAsync(UserInfoDTO user){
+            //check if user exis otherwise proceed to account edit
+            if (await DoesUserExist(user.Email)) return false;
+
+            var userToEdit = await _dataContext.User.SingleOrDefaultAsync(u => u.Id == user.Id);
+            if (userToEdit == null) 
+            return false;
+            
+            userToEdit.Name= user.Name;
+            userToEdit.Email = user.Email;
+            
+            //no use for update since this is already tracking changes 
+           return await _dataContext.SaveChangesAsync()!=0;
+        }
+
 
     }
 }

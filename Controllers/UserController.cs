@@ -2,6 +2,7 @@ using System.Security.Cryptography;
 using itinera_io_backend.Models.DTOS;
 using itinera_io_backend.Services;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Authorization;
 
 namespace itinera_io_backend.Controllers
 {
@@ -64,6 +65,19 @@ namespace itinera_io_backend.Controllers
             return BadRequest(new {Message = "No User Found."});
             }
             
+        }
+
+        
+    
+        [HttpPut("EditUser")]
+        [Authorize] 
+        public async Task<IActionResult> EditUser([FromBody] UserInfoDTO user)
+        {
+            var success = await _userServices.EditUserAsync(user);
+
+            if (success) return Ok(new { Success = true });
+
+            return BadRequest(new { Message = "No user info was edited" });
         }
     
     }
