@@ -1,3 +1,4 @@
 select * from Itinerary;
 
-delete from itinerary where tripId= 21;
+
+delete from Itinerary;

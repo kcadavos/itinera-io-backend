@@ -1,4 +1,4 @@
-Select * from Activity;
+Select * from Activity WHERE tripid=21;
 
 delete from Activity where Id in (11,12);
 
@@ -17,10 +17,12 @@ VALUES
 ( 21, 'Local Market Visit', 'shopping', 'Old Town Market', 'Browse handcrafted goods and taste local snacks', '[]', '[]');
 
 
-select * from Activity where TripId=32
+select * from Activity where TripId=21
 
+select * from Trip where Id=21;
 
-select * from trip where id=32
+update trip set isVotingOpen=1 where Id=21
+
 
 
 

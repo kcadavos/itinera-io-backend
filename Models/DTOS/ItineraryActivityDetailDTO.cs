@@ -5,7 +5,7 @@ namespace itinera_io_backend.Models.DTOS
     public class ItineraryActivityDetailDTO
     {
       
-        public DateOnly itineraryDate {get;set;}
+        public DateOnly ItineraryDate {get;set;}
         public string? Activity{get;set;}
 
         public string? Category{get;set;}

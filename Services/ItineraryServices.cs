@@ -39,7 +39,7 @@ namespace itinera_io_backend.Services
             return trip.EndDate.DayNumber - trip.StartDate.DayNumber + 1;
         }
 
-           public async Task <List <ActivityVoteCountDTO>> GetActivityVoteCountByTripIdAsync(int tripId)
+        public async Task <List <ActivityVoteCountDTO>> GetActivityVoteCountByTripIdAsync(int tripId)
         {
           
             List <ActivityVoteCountDTO> ActivityVoteCountList = new();
@@ -61,20 +61,27 @@ namespace itinera_io_backend.Services
              return ActivityVoteCountList.OrderByDescending(a=> a.TotalYes).ToList(); // returns a sorted descending list by number of votes
         }
 
-     
-     
-         public async Task <bool> GenerateAndSaveItineraryAsync (int tripId)
-       {
+         public async Task <bool> GenerateAndSaveItineraryAsync (ItineraryRequestDTO request)
+        {
    
-            const int numberOfActivitiesPerDay =3;  //3 is the total count of activities per day
-            int tripDuration = await GetTripDurationInDays(tripId);
-            int totalActivitiesNeeded = numberOfActivitiesPerDay * tripDuration;
+
+            int tripDuration = await GetTripDurationInDays(request.TripId);
+            int totalActivitiesNeeded = request.NumberOfActivitiesPerDay * tripDuration;
+            
+         
             
             
-            List <ActivityVoteCountDTO> activities= await GetActivityVoteCountByTripIdAsync(tripId); // returned vote count sorted by top votes
+            List <ActivityVoteCountDTO> activities= await GetActivityVoteCountByTripIdAsync(request.TripId); // returned vote count sorted by top votes
 
-            List <ActivityVoteCountDTO> topActivities = activities.Take(totalActivitiesNeeded).ToList();
+            // if not enough activitiesLog or handle the issue
+            if (activities.Count < totalActivitiesNeeded)
+            {
+             throw new InvalidOperationException("Not enough activities to fill the itinerary.");
+             return false;
+            }
+            List <ActivityVoteCountDTO> topActivities = activities.Take(totalActivitiesNeeded).ToList(); // limits to the total of activities needed to generate the itinerary based on the activity count per day
 
+          
             //randomize the list so that it doesnt put all the Top most liked activities on day 1
             Random rng= new Random();
             topActivities= topActivities.OrderBy(a=>rng.Next()).ToList();
@@ -85,12 +92,19 @@ namespace itinera_io_backend.Services
             for (int i =0;i<tripDuration; i++) //create itinerary based on how many days the trip duration is
             {
                   ItineraryModel itineraryItem= new();
-                  itineraryItem.TripId =tripId;
+                  itineraryItem.TripId =request.TripId;
                   itineraryItem.DayNumber= i+1;
-                  itineraryItem.FirstActivityId = topActivities[i*numberOfActivitiesPerDay].ActivityId;
-                  itineraryItem.SecondActivityId = topActivities[i*numberOfActivitiesPerDay+1].ActivityId;
-                  itineraryItem.ThirdActivityId = topActivities[i*numberOfActivitiesPerDay+2].ActivityId;
-                  itineraryList.Add(itineraryItem);
+                  itineraryItem.ActivityIds= new List<int>() ;
+            
+                  
+                  for (int j =0;j<request.NumberOfActivitiesPerDay; j++) //push the amount activities needed per day
+                    itineraryItem.ActivityIds.Add(topActivities[(i*request.NumberOfActivitiesPerDay)+j].ActivityId);
+                //   itineraryItem.FirstActivityId = topActivities[i*numberOfActivitiesPerDay].ActivityId;
+                //   itineraryItem.SecondActivityId = topActivities[i*numberOfActivitiesPerDay+1].ActivityId;
+                //   itineraryItem.ThirdActivityId = topActivities[i*numberOfActivitiesPerDay+2].ActivityId;
+                //  
+                
+                itineraryList.Add(itineraryItem);
 
                   if (!await AddItineraryAsync(itineraryItem))
                     return false;
@@ -99,71 +113,115 @@ namespace itinera_io_backend.Services
 
             // close the voting once itinerary is generated
             if (!await _tripService.UpdateVotingStatusAsync(new TripStatusDTO 
-            {TripId = tripId,
+            {TripId = request.TripId,
             IsVoteOpen=false}))
                 return false; // update voting failed
 
             return true;
            
         }
+    
+     
+
+//         //  public async Task <bool> GenerateAndSaveItineraryAsync_BK (int tripId){
+   
+//         //     const int numberOfActivitiesPerDay =3;  //3 is the total count of activities per day
+//         //     int tripDuration = await GetTripDurationInDays(tripId);
+//         //     int totalActivitiesNeeded = numberOfActivitiesPerDay * tripDuration;
+            
+            
+//         //     List <ActivityVoteCountDTO> activities= await GetActivityVoteCountByTripIdAsync(tripId); // returned vote count sorted by top votes
+
+//         //     List <ActivityVoteCountDTO> topActivities = activities.Take(totalActivitiesNeeded).ToList();
+
+//         //     //randomize the list so that it doesnt put all the Top most liked activities on day 1
+//         //     Random rng= new Random();
+//         //     topActivities= topActivities.OrderBy(a=>rng.Next()).ToList();
+
+     
+            
+//         //     List <ItineraryModel> itineraryList =new();
+//         //     for (int i =0;i<tripDuration; i++) //create itinerary based on how many days the trip duration is
+//         //     {
+//         //           ItineraryModel itineraryItem= new();
+//         //           itineraryItem.TripId =tripId;
+//         //           itineraryItem.DayNumber= i+1;
+//         //           itineraryItem.FirstActivityId = topActivities[i*numberOfActivitiesPerDay].ActivityId;
+//         //           itineraryItem.SecondActivityId = topActivities[i*numberOfActivitiesPerDay+1].ActivityId;
+//         //           itineraryItem.ThirdActivityId = topActivities[i*numberOfActivitiesPerDay+2].ActivityId;
+//         //           itineraryList.Add(itineraryItem);
+
+//         //           if (!await AddItineraryAsync(itineraryItem))
+//         //             return false;
+
+//         //     }
+
+//         //     // close the voting once itinerary is generated
+//         //     if (!await _tripService.UpdateVotingStatusAsync(new TripStatusDTO 
+//         //     {TripId = tripId,
+//         //     IsVoteOpen=false}))
+//         //         return false; // update voting failed
+
+//         //     return true;
+           
+//         // }
 
     
         
       
-        public async Task<List<ItineraryActivityDetailDTO>> GetActivityDetailsFromItineraryAsync(int tripId)
-        {
-            List <ItineraryModel> generatedItinerary = await GetItinerariesByTripIdAsync(tripId);
-            TripModel tripDetail = await _tripService.GetTripInfo(tripId);
+//         public async Task<List<ItineraryActivityDetailDTO>> GetActivityDetailsFromItineraryAsync(int tripId) {
+//             List <ItineraryModel> generatedItinerary = await GetItinerariesByTripIdAsync(tripId);
+//             TripModel tripDetail = await _tripService.GetTripInfo(tripId);
 
-            // List <ActivityModel> itineraryActivityDetailList = new ();
-            List <ItineraryActivityDetailDTO> intineraryActivityDetailList = new ();
-            int dayCount = 0;
+//             // List <ActivityModel> itineraryActivityDetailList = new ();
+//             List <ItineraryActivityDetailDTO> intineraryActivityDetailList = new ();
+//             int dayCount = 0;
 
-            foreach(var itineraryItem in generatedItinerary) // per day
-            {   
-                // retrieve - First Activity
-                ActivityModel activityDetailItem1 = await _dataContext.Activity.SingleOrDefaultAsync(activity => activity.Id == itineraryItem.FirstActivityId);
-                // only extract info needed
-                ItineraryActivityDetailDTO itineraryActivityDetailitem1 = new();
-                itineraryActivityDetailitem1.itineraryDate =tripDetail.StartDate.AddDays(dayCount);
-                itineraryActivityDetailitem1.Activity = activityDetailItem1.Activity;
-                itineraryActivityDetailitem1.Address = activityDetailItem1.Address;
-                itineraryActivityDetailitem1.Category = activityDetailItem1.Category;
-                itineraryActivityDetailitem1.Details = activityDetailItem1.Details;
+//             foreach(var itineraryItem in generatedItinerary) // per day
+//             {   
+//                 // retrieve - First Activity
+//                 ActivityModel activityDetailItem1 = await _dataContext.Activity.SingleOrDefaultAsync(activity => activity.Id == itineraryItem.FirstActivityId);
+//                 // only extract info needed
+//                 ItineraryActivityDetailDTO itineraryActivityDetailitem1 = new();
+//                 itineraryActivityDetailitem1.itineraryDate =tripDetail.StartDate.AddDays(dayCount);
+//                 itineraryActivityDetailitem1.Activity = activityDetailItem1.Activity;
+//                 itineraryActivityDetailitem1.Address = activityDetailItem1.Address;
+//                 itineraryActivityDetailitem1.Category = activityDetailItem1.Category;
+//                 itineraryActivityDetailitem1.Details = activityDetailItem1.Details;
                 
-                intineraryActivityDetailList.Add(itineraryActivityDetailitem1);// add filtered data to list to be returned
+//                 intineraryActivityDetailList.Add(itineraryActivityDetailitem1);// add filtered data to list to be returned
 
 
-                // retrive - second activity
-                 ActivityModel activityDetailItem2 = await _dataContext.Activity.SingleOrDefaultAsync(activity => activity.Id == itineraryItem.SecondActivityId);
-                // only extract info needed
-                ItineraryActivityDetailDTO itineraryActivityDetailitem2 = new();
-                itineraryActivityDetailitem2.itineraryDate =tripDetail.StartDate.AddDays(dayCount);
-                itineraryActivityDetailitem2.Activity = activityDetailItem2.Activity;
-                itineraryActivityDetailitem2.Address = activityDetailItem2.Address;
-                itineraryActivityDetailitem2.Category = activityDetailItem2.Category;
-                itineraryActivityDetailitem2.Details = activityDetailItem2.Details;
+//                 // retrive - second activity
+//                  ActivityModel activityDetailItem2 = await _dataContext.Activity.SingleOrDefaultAsync(activity => activity.Id == itineraryItem.SecondActivityId);
+//                 // only extract info needed
+//                 ItineraryActivityDetailDTO itineraryActivityDetailitem2 = new();
+//                 itineraryActivityDetailitem2.itineraryDate =tripDetail.StartDate.AddDays(dayCount);
+//                 itineraryActivityDetailitem2.Activity = activityDetailItem2.Activity;
+//                 itineraryActivityDetailitem2.Address = activityDetailItem2.Address;
+//                 itineraryActivityDetailitem2.Category = activityDetailItem2.Category;
+//                 itineraryActivityDetailitem2.Details = activityDetailItem2.Details;
 
-                intineraryActivityDetailList.Add(itineraryActivityDetailitem2); // add filtered data to list to be returned
+//                 intineraryActivityDetailList.Add(itineraryActivityDetailitem2); // add filtered data to list to be returned
 
-                 // retrive - third activity
-                   ActivityModel activityDetailItem3 = await _dataContext.Activity.SingleOrDefaultAsync(activity => activity.Id == itineraryItem.SecondActivityId);
+//                  // retrive - third activity
+//                    ActivityModel activityDetailItem3 = await _dataContext.Activity.SingleOrDefaultAsync(activity => activity.Id == itineraryItem.SecondActivityId);
                 
-                // only extract info needed
-                ItineraryActivityDetailDTO itineraryActivityDetailitem3 = new();
-                itineraryActivityDetailitem3.itineraryDate =tripDetail.StartDate.AddDays(dayCount);
-                itineraryActivityDetailitem3.Activity = activityDetailItem3.Activity;
-                itineraryActivityDetailitem3.Address = activityDetailItem3.Address;
-                itineraryActivityDetailitem3.Category = activityDetailItem3.Category;
-                itineraryActivityDetailitem3.Details = activityDetailItem3.Details;
+//                 // only extract info needed
+//                 ItineraryActivityDetailDTO itineraryActivityDetailitem3 = new();
+//                 itineraryActivityDetailitem3.itineraryDate =tripDetail.StartDate.AddDays(dayCount);
+//                 itineraryActivityDetailitem3.Activity = activityDetailItem3.Activity;
+//                 itineraryActivityDetailitem3.Address = activityDetailItem3.Address;
+//                 itineraryActivityDetailitem3.Category = activityDetailItem3.Category;
+//                 itineraryActivityDetailitem3.Details = activityDetailItem3.Details;
 
-                intineraryActivityDetailList.Add(itineraryActivityDetailitem3); // add filtered data to list to be returned
+//                 intineraryActivityDetailList.Add(itineraryActivityDetailitem3); // add filtered data to list to be returned
 
-                dayCount++;
-            }
+//                 dayCount++;
+//             }
 
-            return intineraryActivityDetailList;
-        }
+//             return intineraryActivityDetailList;
+//         }
 
         
        

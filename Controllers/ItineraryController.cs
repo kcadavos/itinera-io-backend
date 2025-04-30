@@ -35,17 +35,17 @@ namespace itinera_io_backend.Controllers
                 return BadRequest (new {Message ="itinerary not added"});
         }
 
-        [HttpGet("GenerateAndSaveItinerary/{tripId}")]
-        public async Task<IActionResult> GenerateItinerary(int tripId )
+        [HttpPost("GenerateAndSaveItinerary")]
+        public async Task<IActionResult> GenerateAndSaveItinerary([FromBody] ItineraryRequestDTO request )
         {
-            var success = await _itineraryServices.GenerateAndSaveItineraryAsync(tripId);
-            if (success!=null)
+            var success = await _itineraryServices.GenerateAndSaveItineraryAsync(request); 
+            if (success)
             return Ok();
             else 
             return BadRequest (new {Message = "Invalid Trip Id"});
         }
 
-          [HttpGet("GetActivityVoteCount/{tripId}")]
+        [HttpGet("GetActivityVoteCount/{tripId}")]
         public async Task<IActionResult> GetActivityVoteCount(int tripId )
         {
             var activities = await _itineraryServices.GetActivityVoteCountByTripIdAsync(tripId);
@@ -58,14 +58,14 @@ namespace itinera_io_backend.Controllers
 
  
 
-        [HttpGet("GetActivityDetailsFromItinerary/{tripId}")]
-        public async Task<IActionResult> GetActivityDetailsFromItinerary(int tripId)
-        {
-            var itineraryDetails = await _itineraryServices.GetActivityDetailsFromItineraryAsync(tripId);
-            if (itineraryDetails!=null && itineraryDetails.Any())
-            return Ok(itineraryDetails);
-            else 
-                return BadRequest (new {Message ="intinerary details not retrieved"});
-        }
+        // [HttpGet("GetActivityDetailsFromItinerary/{tripId}")]
+        // public async Task<IActionResult> GetActivityDetailsFromItinerary(int tripId)
+        // {
+        //     var itineraryDetails = await _itineraryServices.GetActivityDetailsFromItineraryAsync(tripId);
+        //     if (itineraryDetails!=null && itineraryDetails.Any())
+        //     return Ok(itineraryDetails);
+        //     else 
+        //         return BadRequest (new {Message ="intinerary details not retrieved"});
+        // }
     }
 }
