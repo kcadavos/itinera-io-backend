@@ -2,6 +2,7 @@
 using itinera_io_backend.Models;
 using itinera_io_backend.Services;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Authorization;
 
 namespace itinera_io_backend.Controllers
 {   
