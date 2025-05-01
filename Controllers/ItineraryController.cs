@@ -1,11 +1,12 @@
 using itinera_io_backend.Models.DTOS;
 using itinera_io_backend.Services;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Authorization;
 
 namespace itinera_io_backend.Controllers
 {   [ApiController]
     [Route("[controller]")]
-    // [Authorize]
+    [Authorize]
   
     public class ItineraryController: ControllerBase
     {
