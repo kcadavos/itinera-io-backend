@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace itinera_io_backend.Controllers
 {   [ApiController]
     [Route("[controller]")]
+  
     public class ItineraryController: ControllerBase
     {
         private readonly ItineraryServices _itineraryServices;
@@ -40,7 +41,7 @@ namespace itinera_io_backend.Controllers
         {
             var success = await _itineraryServices.GenerateAndSaveItineraryAsync(request); 
             if (success)
-            return Ok();
+            return Ok(new {Success=true});
             else 
             return BadRequest (new {Message = "Invalid Trip Id"});
         }
