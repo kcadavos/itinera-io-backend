@@ -20,6 +20,7 @@ namespace itinera_io_backend.Services
         }
         
         public async Task<List <ActivityModel>> GetActivitiesByTripIdAsync (int tripId)=> await _dataContext.Activity.Where(activity => activity.TripId==tripId).ToListAsync();
+
         
         public async Task<List <ActivityModel>> GetUndecidedActivitiesByTripIdAndUserIdAsync (int tripId,int userId)
         {
@@ -73,6 +74,12 @@ namespace itinera_io_backend.Services
             return await _dataContext.SaveChangesAsync()!=0;
         }
 
+        public async Task<ActivityModel> GetActivityDetailsAsync (int activityId)
+        {
+            return await _dataContext.Activity.FindAsync(activityId); // using primary key to search
+            
+    
+        }
 
         
      

@@ -91,6 +91,17 @@ namespace itinera_io_backend.Controllers
             else
             return BadRequest(new {Message ="Error removing a vote.Activity Id doesn't exist or Invalid VoteType, use only yes or no values"});
         }
+        
+        [HttpGet("GetActivityDetails/{activityId}")]
+        public async Task<IActionResult> Get(int activityId)
+        {
+            var activity = await _activityServices.GetActivityDetailsAsync(activityId);
+            if (activity != null) 
+                return Ok(activity);
+            else
+               return BadRequest(new{ Message = "No activity  available" });
+            
+        }
 
       
     }
