@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace itinera_io_backend.Controllers
 {   [ApiController]
     [Route("[controller]")]
+    // [Authorize]
   
     public class ItineraryController: ControllerBase
     {
