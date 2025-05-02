@@ -1,10 +1,10 @@
 select * From Activity where TripId=21
 
-
+select * from TRip
 Select * from Itinerary
 select * From dbo.[User];
 
-Update Trip set IsVotingOpen=1 where id=21;
+
 -- Insert Data for Trip 1 (Paris)
 INSERT INTO Trip
     ( Destination, StartDate, EndDate, OwnerId, ParticipantsId, IsVotingOpen)
