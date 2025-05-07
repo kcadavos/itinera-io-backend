@@ -1,5 +1,7 @@
 Select * from Activity WHERE tripid=31;
 
+select * from dbo.[User];
+
 delete from Activity where Id in (11,12);
 
 INSERT INTO Activity (tripId, activity, category, address, details, voteYes, voteNo)

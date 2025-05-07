@@ -164,15 +164,16 @@ namespace itinera_io_backend.Services
             return false; // exit if there is no user found
 
             if (userToEdit.Name != user.Name)    // update only when the values are different 
-            {
-                   //check if user email exists otherwise proceed to account edit
-                   if (await DoesUserExist(user.Email)) return false;   // exit if the useremail already exists in the system, it has to be unique
-                     userToEdit.Name= user.Name;
-            }
+                userToEdit.Name= user.Name;
+    
           
 
             if (userToEdit.Email != user.Email)  // update only when the values are different 
-            userToEdit.Email = user.Email;
+            {
+                //check if user email exists otherwise proceed to  edit email
+                if (await DoesUserExist(user.Email)) return false;   // exit if the useremail already exists in the system, it has to be unique
+                userToEdit.Email = user.Email;
+            }
             
             //no use for update since this is already tracking changes 
            return await _dataContext.SaveChangesAsync()!=0;
