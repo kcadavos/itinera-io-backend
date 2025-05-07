@@ -156,8 +156,8 @@ namespace itinera_io_backend.Services
         }
 
          public async Task<bool> EditUserAsync(UserInfoDTO user){
-            //check if user exis otherwise proceed to account edit
-            if (await DoesUserExist(user.Email)) return false;
+            //check if user email exists otherwise proceed to account edit
+            if (await DoesUserExist(user.Email)) return false;  
 
             var userToEdit = await _dataContext.User.SingleOrDefaultAsync(u => u.Id == user.Id);
             if (userToEdit == null) 
