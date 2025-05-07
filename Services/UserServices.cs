@@ -162,8 +162,11 @@ namespace itinera_io_backend.Services
             var userToEdit = await _dataContext.User.SingleOrDefaultAsync(u => u.Id == user.Id);
             if (userToEdit == null) 
             return false;
-            
+
+            if (userToEdit.Name != user.Name)    // update only when the values are different 
             userToEdit.Name= user.Name;
+
+            if (userToEdit.Email != user.Email)  // update only when the values are different 
             userToEdit.Email = user.Email;
             
             //no use for update since this is already tracking changes 
