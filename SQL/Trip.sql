@@ -1,8 +1,10 @@
 select * From Activity where TripId=21
 
-select * from TRip
+select * from TRip where id=21
 Select * from Itinerary
 select * From dbo.[User];
+
+delete from itinerary where tripId=21;
 
 
 -- Insert Data for Trip 1 (Paris)
@@ -36,3 +38,12 @@ INSERT INTO Trip
     ( Destination, StartDate, EndDate, OwnerId, ParticipantsId, IsVotingOpen)
 VALUES
     ( 'Rome', '2025-07-05', '2025-07-12', 5, '[2,3]', 1);
+
+
+    delete from itinerary where tripId=21;
+    Update trip set isVotingOpen=1 where id=21;
+    select * from trip where id=21;
+
+
+
+select * from itinerary where tripId=21

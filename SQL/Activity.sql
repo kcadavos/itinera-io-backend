@@ -1,4 +1,4 @@
-Select * from Activity WHERE tripid=31;
+Select * from Activity WHERE tripid=30;
 
 select * from dbo.[User];
 

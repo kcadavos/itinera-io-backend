@@ -2,9 +2,11 @@ using itinera_io_backend.Models.DTOS;
 using itinera_io_backend.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Authorization;
+using itinera_io_backend.Models.Enums;
 
 namespace itinera_io_backend.Controllers
-{   [ApiController]
+{   
+    [ApiController]
     [Route("[controller]")]
     [Authorize]
   
@@ -38,16 +40,7 @@ namespace itinera_io_backend.Controllers
                 return BadRequest (new {Message ="itinerary not added"});
         }
 
-        [HttpPost("GenerateAndSaveItinerary")]
-        public async Task<IActionResult> GenerateAndSaveItinerary([FromBody] ItineraryRequestDTO request )
-        {
-            var success = await _itineraryServices.GenerateAndSaveItineraryAsync(request); 
-            if (success)
-            return Ok(new {Success=true});
-            else 
-            return BadRequest (new {Message = "Invalid Trip Id"});
-        }
-
+ 
         [HttpGet("GetActivityVoteCount/{tripId}")]
         public async Task<IActionResult> GetActivityVoteCount(int tripId )
         {
@@ -58,17 +51,31 @@ namespace itinera_io_backend.Controllers
             return BadRequest (new {Message = "Invalid Trip Id"});
         }
 
+       [HttpPost("GenerateAndSaveItinerary")]
+        public async Task<IActionResult> GenerateAndSaveItinerary([FromBody] ItineraryRequestDTO request )
+        {
+            var result = await _itineraryServices.GenerateAndSaveItineraryAsync(request); 
+            switch(result)
+            {
 
- 
+                case  ItineraryGenerationResultEnum.Success:
+                    return Ok("Itinerary generated successfully."); // returns 200 OK
 
-        // [HttpGet("GetActivityDetailsFromItinerary/{tripId}")]
-        // public async Task<IActionResult> GetActivityDetailsFromItinerary(int tripId)
-        // {
-        //     var itineraryDetails = await _itineraryServices.GetActivityDetailsFromItineraryAsync(tripId);
-        //     if (itineraryDetails!=null && itineraryDetails.Any())
-        //     return Ok(itineraryDetails);
-        //     else 
-        //         return BadRequest (new {Message ="intinerary details not retrieved"});
-        // }
+                case ItineraryGenerationResultEnum.NotEnoughActivities:
+                    return BadRequest("Not enough activities to generate itinerary."); // returns 400  bad request
+                
+                case ItineraryGenerationResultEnum.SaveFailed:
+                    return StatusCode(500, "Failed to save itinerary.");
+                
+                 case ItineraryGenerationResultEnum.VotingStatusUpdateFailed:
+                    return  StatusCode(500, "Failed to update trip voting status.Voting Status is already closed.");
+
+                default:  return StatusCode(500, "Unknown error.");
+
+            }
+        }
+    
     }
+
+
 }

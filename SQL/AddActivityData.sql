@@ -1,74 +1,33 @@
--- Update Cloud 9 Surfing
-UPDATE Activity 
-SET voteYes = '[3, 6, 20, 4]', voteNo = '[5]'
-WHERE tripId = 31 AND activity = 'Cloud 9 Surfing';
+delete  from activity where TripId =21;
 
--- Update Surf Lessons
-UPDATE Activity 
-SET voteYes = '[5, 6]', voteNo = '[3, 20, 4]'
-WHERE tripId = 31 AND activity = 'Surf Lessons';
+-- Insert activities for Italy Trip (tripId = 21)
 
--- Update Island Hopping Tour
-UPDATE Activity 
-SET voteYes = '[3, 5, 6, 20]', voteNo = '[4]'
-WHERE tripId = 31 AND activity = 'Island Hopping Tour';
+INSERT INTO Activity (tripId, activity, voteYes, voteNo, category, address, details)
+VALUES (21, 'Visit Colosseum', '[3, 5, 13, 16, 23]', '[4, 6, 12, 14, 25, 31]', 'Culture & History', 'Piazza del Colosseo, 1, 00184 Roma RM, Italy', 'Explore the iconic Colosseum in Rome, a symbol of ancient Roman engineering and gladiatorial combat.');
 
--- Update Sugba Lagoon Trip
-UPDATE Activity 
-SET voteYes = '[6, 4]', voteNo = '[3, 5, 20]'
-WHERE tripId = 31 AND activity = 'Sugba Lagoon Trip';
+INSERT INTO Activity (tripId, activity, voteYes, voteNo, category, address, details)
+VALUES (21, 'Gondola Ride in Venice', '[4, 6, 14, 23, 31, 12]', '[3, 5, 13, 16, 25]', 'Relaxation & Wellness', 'Piazza San Marco, 30124 Venezia VE, Italy', 'Take a romantic gondola ride through the canals of Venice for a unique view of the city’s historical architecture.');
 
--- Update Magpupungko Rock Pools
-UPDATE Activity 
-SET voteYes = '[3, 5, 4]', voteNo = '[6, 20]'
-WHERE tripId = 31 AND activity = 'Magpupungko Rock Pools';
+INSERT INTO Activity (tripId, activity, voteYes, voteNo, category, address, details)
+VALUES (21, 'Tuscan Wine Tour', '[12, 13, 16, 25, 31]', '[3, 4, 5, 6, 14, 23]', 'Food & Drink', 'Tuscany, Italy', 'Tour the picturesque vineyards of Tuscany and sample some of Italy’s finest wines.');
 
--- Update Siargao Boulevard Sunset Walk
-UPDATE Activity 
-SET voteYes = '[20]', voteNo = '[3, 5, 6, 4]'
-WHERE tripId = 31 AND activity = 'Siargao Boulevard Sunset Walk';
+INSERT INTO Activity (tripId, activity, voteYes, voteNo, category, address, details)
+VALUES (21, 'Cooking Class in Florence', '[3, 4, 5, 12, 14, 31]', '[6, 13, 16, 23, 25]', 'Food & Drink', 'Piazza della Signoria, 50122 Firenze FI, Italy', 'Join a hands-on cooking class and learn how to prepare traditional Italian dishes in the heart of Florence.');
 
--- Update Dinner at Kermit
-UPDATE Activity 
-SET voteYes = '[5, 20, 4]', voteNo = '[3, 6]'
-WHERE tripId = 31 AND activity = 'Dinner at Kermit';
+INSERT INTO Activity (tripId, activity, voteYes, voteNo, category, address, details)
+VALUES (21, 'Pompeii Day Trip', '[4, 5, 6, 16, 23]', '[3, 12, 13, 14, 25, 31]', 'Culture & History', 'Pompei, 80045 Naples, Italy', 'Discover the ancient city of Pompeii, buried by volcanic ash in 79 AD, and explore its remarkably well-preserved ruins.');
 
--- Update Coconut Grove Picnic
-UPDATE Activity 
-SET voteYes = '[3]', voteNo = '[5, 6, 20, 4]'
-WHERE tripId = 31 AND activity = 'Coconut Grove Picnic';
+INSERT INTO Activity (tripId, activity, voteYes, voteNo, category, address, details)
+VALUES (21, 'Lake Como Boat Cruise', '[3, 12, 13, 25, 31]', '[4, 5, 6, 14, 16, 23]', 'Relaxation & Wellness', 'Como, 22100 Como CO, Italy', 'Enjoy a scenic boat ride on Lake Como and soak in breathtaking views of the surrounding mountains and luxury villas.');
 
--- Update Sohoton Cove National Park
-UPDATE Activity 
-SET voteYes = '[5, 6, 20]', voteNo = '[3, 4]'
-WHERE tripId = 31 AND activity = 'Sohoton Cove National Park';
+INSERT INTO Activity (tripId, activity, voteYes, voteNo, category, address, details)
+VALUES (21, 'Cinque Terre Hike', '[3, 5, 6, 14, 23, 31]', '[4, 12, 13, 16, 25]', 'Adventure & Outdoors', 'Cinque Terre, 19018 La Spezia SP, Italy', 'Hike through the stunning Cinque Terre National Park and enjoy panoramic views of colorful cliffside villages and the Ligurian Sea.');
 
--- Update Taktak Falls Visit
-UPDATE Activity 
-SET voteYes = '[3, 20, 4]', voteNo = '[5, 6]'
-WHERE tripId = 31 AND activity = 'Taktak Falls Visit';
+INSERT INTO Activity (tripId, activity, voteYes, voteNo, category, address, details)
+VALUES (21, 'Vatican Museum Tour', '[3, 4, 6, 14, 16]', '[5, 12, 13, 23, 25, 31]', 'Culture & History', 'Viale Vaticano, 00120 Città del Vaticano', 'Visit the Vatican Museums to see some of the most famous art collections in the world, including the Sistine Chapel.');
 
--- Update Pacifico Beach Day
-UPDATE Activity 
-SET voteYes = '[5, 6, 20]', voteNo = '[3, 4]'
-WHERE tripId = 31 AND activity = 'Pacifico Beach Day';
+INSERT INTO Activity (tripId, activity, voteYes, voteNo, category, address, details)
+VALUES (21, 'Amalfi Coast Scenic Drive', '[5, 12, 13, 16, 25]', '[3, 4, 6, 14, 23, 31]', 'Adventure & Outdoors', 'Amalfi Coast, 84011 Amalfi SA, Italy', 'Take a scenic drive along the dramatic Amalfi Coast, with stunning views of cliffs, colorful towns, and the Mediterranean Sea.');
 
--- Update Siargao Night Market
-UPDATE Activity 
-SET voteYes = '[3, 5, 4]', voteNo = '[6, 20]'
-WHERE tripId = 31 AND activity = 'Siargao Night Market';
-
--- Update Jungle Disco Party
-UPDATE Activity 
-SET voteYes = '[3, 6]', voteNo = '[5, 20, 4]'
-WHERE tripId = 31 AND activity = 'Jungle Disco Party';
-
--- Update Tayangban Cave Pool
-UPDATE Activity 
-SET voteYes = '[5, 20]', voteNo = '[3, 6, 4]'
-WHERE tripId = 31 AND activity = 'Tayangban Cave Pool';
-
--- Update Seafood Dinner at Harana
-UPDATE Activity 
-SET voteYes = '[6, 20, 4]', voteNo = '[3, 5]'
-WHERE tripId = 31 AND activity = 'Seafood Dinner at Harana';
+INSERT INTO Activity (tripId, activity, voteYes, voteNo, category, address, details)
+VALUES (21, 'Truffle Hunting Experience', '[4, 5, 6, 14, 31]', '[3, 12, 13, 16, 23, 25]', 'Food & Drink', 'Piedmont, Italy', 'Embark on a truffle hunt in the Piedmont region, learning from expert hunters and savoring freshly found truffles.');
