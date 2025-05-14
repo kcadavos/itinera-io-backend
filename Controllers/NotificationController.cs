@@ -1,11 +1,9 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+
 using Microsoft.AspNetCore.Mvc;
 using itinera_io_backend.Models;
 using itinera_io_backend.Models.DTOS;
 using itinera_io_backend.Services;
+using Microsoft.AspNetCore.Authorization;
 
 namespace itinera_io_backend.Controllers
 {
