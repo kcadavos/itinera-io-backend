@@ -39,7 +39,7 @@ namespace itinera_io_backend.Controllers
                 return BadRequest(new { Message = "Group Notification  not added." });
         }
 
-        [HttpGet("GetUnreadNotificationsByUserId")]
+        [HttpGet("GetUnreadNotificationsByUserId/{userId}")]
         public async Task<IActionResult> GetUnreadNotificationsByUserId(int userId)
         {
             var notificationList = await _notificationServices.GetUnreadNotificationsByUserIdAsync(userId);
@@ -50,7 +50,7 @@ namespace itinera_io_backend.Controllers
             
         }
 
-        [HttpPatch("MarkNotificationAsRead")]
+        [HttpPatch("MarkNotificationAsRead/{notificationId}")]
         public async Task<IActionResult> MarkNotificationAsRead(int notificationId)
         {
             var success = await _notificationServices.MarkNotificationAsReadAsync(notificationId);
