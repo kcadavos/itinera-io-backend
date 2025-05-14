@@ -50,3 +50,6 @@ delete from Activity where id between 98 and 100;
 
 
 select * from itinerary where tripId=21
+
+
+select * from notification

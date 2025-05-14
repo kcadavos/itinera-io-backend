@@ -22,7 +22,7 @@ namespace itinera_io_backend.Controllers
         }
 
         [HttpPost("AddNotification")]
-        public async Task<IActionResult> AddNotification(AddNotificationDTO notification)
+        public async Task<IActionResult> AddNotification([FromBody] AddNotificationDTO notification)
         {
             var success = await _notificationServices.AddNotificationAsync(notification);
             if (success) return Ok(new { Success = true });
@@ -31,7 +31,7 @@ namespace itinera_io_backend.Controllers
         }
 
         [HttpPost("AddGroupNotification")]
-        public async Task<IActionResult> AddNotification(AddGroupNotificationDTO notification)
+        public async Task<IActionResult> AddNotification([FromBody] AddGroupNotificationDTO notification)
         {
             var success = await _notificationServices.AddGroupNotificationAsync(notification);
             if (success) return Ok(new { Success = true });
