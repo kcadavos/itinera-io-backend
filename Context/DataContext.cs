@@ -17,6 +17,7 @@ namespace itinera_io_backend.Context
         public DbSet<TripModel> Trip {get;set;}
         public DbSet<ActivityModel> Activity {get;set;}
         public DbSet<ItineraryModel> Itinerary {get;set;}
+        public DbSet<NotificationModel> Notification {get;set;}
         
     }
 }

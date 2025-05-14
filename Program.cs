@@ -49,6 +49,7 @@ builder.Services.AddScoped<UserServices>();
 builder.Services.AddScoped<TripServices>();
 builder.Services.AddScoped<ActivityServices>();
 builder.Services.AddScoped<ItineraryServices>();
+builder.Services.AddScoped<NotificationServices>();
 
 
 var connectionString = builder.Configuration.GetConnectionString("DatabaseConnection");

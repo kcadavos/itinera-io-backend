@@ -39,7 +39,10 @@ INSERT INTO Trip
 VALUES
     ( 'Rome', '2025-07-05', '2025-07-12', 5, '[2,3]', 1);
 
+select * from Activity where tripId=21;
 
+delete from Activity where id between 98 and 100;
+   
     delete from itinerary where tripId=21;
     Update trip set isVotingOpen=1 where id=21;
     select * from trip where id=21;
