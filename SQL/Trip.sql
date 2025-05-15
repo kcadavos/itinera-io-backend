@@ -53,3 +53,5 @@ select * from itinerary where tripId=21
 
 
 select * from notification
+
+Select * from [User]

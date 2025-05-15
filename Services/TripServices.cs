@@ -25,6 +25,13 @@ namespace itinera_io_backend.Services
            return await _dataContext.Trip.Where(trip => trip.ParticipantsId != null && trip.ParticipantsId.Contains(id) || trip.OwnerId== id).ToListAsync();
         
         }
+         //get trip based on the tripId
+        public async Task <TripModel> GetTripDetailsAsync (int id)
+        {
+        
+           return await _dataContext.Trip.SingleOrDefaultAsync(trip => trip.Id == id);
+        
+        }
 
         public async Task<bool> AddTripAsync (TripModel trip)
         {

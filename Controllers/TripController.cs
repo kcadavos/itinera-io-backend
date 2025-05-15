@@ -30,6 +30,17 @@ namespace itinera_io_backend.Controllers
             
         }
 
+        [HttpGet("GetTripDetails/{tripId}")]
+        public async Task<IActionResult> GetTripDetails(int tripId)
+        {
+            var trip = await _tripServices.GetTripDetailsAsync(tripId);
+            if (trip!=null  && trip.Id != 0) // checks if trip contains anything
+                return Ok(trip);
+            else
+               return BadRequest(new{ Message = "No trip details retrieved" });
+            
+        }
+
         [HttpPost("AddTrip")]
         public async Task<IActionResult> AddTrip(TripModel trip)
         {
