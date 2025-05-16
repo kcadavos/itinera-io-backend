@@ -22,8 +22,11 @@ namespace itinera_io_backend.Services
         public async Task<List <TripModel>> GetTripsByUserIdAsync (int id)
         {
 
-           return await _dataContext.Trip.Where(trip => trip.ParticipantsId != null && trip.ParticipantsId.Contains(id) || trip.OwnerId== id).ToListAsync();
-        
+           return await _dataContext.Trip.Where(trip => trip.ParticipantsId != null && trip.ParticipantsId.Contains(id) || trip.OwnerId== id)
+                        .OrderBy(trip => trip.StartDate) // sort by soonest to latest
+                        .ToListAsync();
+            
+       
         }
          //get trip based on the tripId
         public async Task <TripModel> GetTripDetailsAsync (int id)
