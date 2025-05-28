@@ -98,7 +98,7 @@ namespace itinera_io_backend.Services
                 // issuer: "http://localhost:5000",
                 // audience: "http://localhost:5000",
               claims: claims,
-                expires: DateTime.Now.AddMinutes(30),
+                expires: DateTime.Now.AddMinutes(60),
               signingCredentials: signingCredentials
             );
 
