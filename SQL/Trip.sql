@@ -55,3 +55,32 @@ select * from itinerary where tripId=21
 select * from notification
 
 Select * from [User]
+
+INSERT INTO Trip (Destination, StartDate, EndDate, OwnerId, ParticipantsId, isVotingOpen)
+VALUES
+('Italy', '2025-06-10', '2025-06-20', 11, '[12,3,4,5,25,6,13,16,14,23,31]', 1);
+
+select * from trip where ownerId=44
+
+
+
+UPDATE Trip
+SET OwnerId = 44
+WHERE Id = 166;
+
+INSERT INTO Trip (Destination, StartDate, EndDate, OwnerId, ParticipantsId, isVotingOpen)
+VALUES
+('Japan', '2025-09-05', '2025-09-18', 44, '[12,6,5,3,8,10]', 1),
+
+('Iceland', '2025-12-01', '2025-12-10', 44, '[5,6,7,8,3,14]', 1),
+
+('Thailand', '2026-01-15', '2026-01-30', 44, '[25,3,4,5,6,7,8,9]', 1),
+
+('Canada - Rockies', '2025-07-20', '2025-07-29', 44, '[14,13,6,3,23]', 1);
+
+INSERT INTO Trip (Destination, StartDate, EndDate, OwnerId, ParticipantsId, isVotingOpen)
+VALUES
+('Spain - Andalusia', '2025-10-05', '2025-10-18', 3, '[3,5,6,8,10,14,44]', 1);
+
+
+select * from trip
