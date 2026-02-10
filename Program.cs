@@ -82,7 +82,7 @@ builder.Services.AddAuthentication(options => {
         ValidateIssuerSigningKey = true, // Check the tokens signature is valid
         
         ValidIssuer = "https://itineraioapi-ebdthgaebndcddam.westus2-01.azurewebsites.net/", 
-        ValidAudience= "https://itineraioapi-cqapgsgcbschc7hu.westus-01.azurewebsites.net/",
+        ValidAudience= "https://itineraioapi-ebdthgaebndcddam.westus2-01.azurewebsites.net/",
         // ValidIssuer ="http://localhost:5000/",
         // ValidAudience="http://localhost:5000/",
     
