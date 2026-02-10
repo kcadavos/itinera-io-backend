@@ -170,3 +170,72 @@ VALUES
 (172, 'Horseback Riding in Doñana Park', 'Adventure & Outdoors', 'Doñana National Park, Huelva, Spain', 'Explore wetlands and forests on horseback in one of Spain’s national treasures.', '[5, 6, 9]', '[7, 44]'),
 
 (172, 'Arabian Baths Experience', 'Relaxation & Wellness', 'Baños Árabes, Córdoba, Spain', 'Enjoy traditional hot baths, steam rooms, and massages in a restored hammam.', '[6, 7, 9]', '[5, 44]');
+
+
+INSERT INTO Activity (TripId, Activity, Category, Address, Details, VoteYes, VoteNo)
+VALUES
+(176, 'Goat Yoga on a Rooftop', 'Relaxation & Wellness', '123 Goatway Blvd, Portland, OR', 'Do yoga with goats that may or may not climb on you.', '[6, 9, 3]', '[5, 7, 12]'),
+
+(176, 'Tour the Peculiarium', 'Culture & History', '2234 NW Thurman St, Portland, OR', 'A museum full of the strange, the bizarre, and a life-size Bigfoot.', '[5, 6, 12]', '[3, 7, 9]'),
+
+(176, 'Mushroom Latte Crawl', 'Food & Drink', 'Various Cafés, Portland, OR', 'Sample mushroom-based coffee until you hallucinate responsibility.', '[3, 5, 7]', '[6, 9, 12]'),
+
+(176, 'Watch the Unipiper Perform', 'Entertainment & Nightlife', 'Downtown Portland, OR', 'Bagpipes. Unicycle. Darth Vader mask. Just Portland things.', '[6, 7, 12]', '[3, 5, 9]'),
+
+(176, 'Witchy Aura Photo Booth', 'Culture & History', '319 NE Wygant St, Portland, OR', 'See your aura, buy a crystal, and maybe unlock your third eye.', '[3, 6, 9]', '[5, 7, 12]'),
+
+(176, 'Tiny House Hotel Sleepover', 'Relaxation & Wellness', '5009 NE 11th Ave, Portland, OR', 'Sleep in a house the size of your luggage and love it.', '[5, 6, 9]', '[3, 7, 12]'),
+
+(176, 'DIY Taxidermy Class', 'Adventure & Outdoors', '13 Oddity Ln, Portland, OR', 'Stuff a squirrel and question your life choices.', '[3, 6, 12]', '[5, 7, 9]'),
+
+(176, 'Soapbox Derby Mayhem', 'Adventure & Outdoors', 'Mt. Tabor Park, Portland, OR', 'Watch grown adults crash glorified carts with pride.', '[5, 6, 7]', '[3, 9, 12]'),
+
+(176, 'Psychic Chicken Reading', 'Entertainment & Nightlife', '432 Cluck St, Portland, OR', 'Ask life questions. Chicken pecks at tarot cards. Fate sealed.', '[6, 9, 12]', '[3, 5, 7]'),
+
+(176, 'Midnight Donut Crawl', 'Food & Drink', 'Multiple Voodoo Donut Locations, Portland, OR', 'Donuts, glitter, and sugar-induced epiphanies after dark.', '[3, 5, 9]', '[6, 7, 12]');
+
+select * from trip
+--- puerto rico --
+INSERT INTO Activity (TripId, Activity, Category, Address, Details, VoteYes, VoteNo)
+VALUES
+(173, 'Bioluminescent Bay Kayaking', 'Adventure & Outdoors', 'Laguna Grande, Fajardo, PR', 'Kayak at night through glowing waters filled with bioluminescent plankton.', '[3]', '[]'),
+
+(173, 'Salsa Dancing in Old San Juan', 'Entertainment & Nightlife', 'Calle del Cristo, San Juan, PR', 'Learn spicy dance moves under the stars with local instructors.', '[]', '[3]'),
+
+(173, 'Coffee Plantation Tour', 'Food & Drink', 'Hacienda Pomarrosa, Ponce, PR', 'Sip fresh Puerto Rican coffee straight from the source.', '[3]', '[]'),
+
+(173, 'El Yunque Rainforest Hike', 'Adventure & Outdoors', 'El Yunque National Forest, PR', 'Hike through lush tropical trails and waterfall swim spots.', '[]', '[3]'),
+
+(173, 'Historic Fort Tour', 'Culture & History', 'Castillo San Felipe del Morro, San Juan, PR', 'Walk the ramparts of a centuries-old Spanish fortress.', '[3]', '[]'),
+
+(173, 'Beach Hammock & Piña Coladas', 'Relaxation & Wellness', 'Flamenco Beach, Culebra, PR', 'Swing in a hammock with a cold drink and zero regrets.', '[3]', '[]'),
+
+(173, 'Street Art & Mofongo Crawl', 'Culture & History', 'Santurce, San Juan, PR', 'See murals and taste mofongo at hole-in-the-wall gems.', '[]', '[3]'),
+
+(173, 'Island Hopping by Catamaran', 'Adventure & Outdoors', 'Fajardo Marina, PR', 'Jump between tropical islands with snacks and snorkeling gear.', '[3]', '[]'),
+
+(173, 'Sunset Drum Circle', 'Entertainment & Nightlife', 'Ocean Park Beach, San Juan, PR', 'Join a beach drum jam at golden hour—no rhythm required.', '[]', '[3]'),
+
+(173, 'Spa Day in the Mountains', 'Relaxation & Wellness', 'Orocovis, PR', 'Steam, soak, and sigh in the lush Puerto Rican highlands.', '[3]', '[]');
+
+INSERT INTO Activity (TripId, Activity, Category, Address, Details, VoteYes, VoteNo)
+VALUES
+(183, 'Bioluminescent Bay Kayaking', 'Adventure & Outdoors', 'Laguna Grande, Fajardo, PR', 'Kayak at night through glowing waters filled with bioluminescent plankton.', '[3]', '[7]'),
+
+(183, 'Salsa Dancing in Old San Juan', 'Entertainment & Nightlife', 'Calle del Cristo, San Juan, PR', 'Learn spicy dance moves under the stars with local instructors.', '[7]', '[3]'),
+
+(183, 'Coffee Plantation Tour', 'Food & Drink', 'Hacienda Pomarrosa, Ponce, PR', 'Sip fresh Puerto Rican coffee straight from the source.', '[3, 7]', '[]'),
+
+(183, 'El Yunque Rainforest Hike', 'Adventure & Outdoors', 'El Yunque National Forest, PR', 'Hike through lush tropical trails and waterfall swim spots.', '[3]', '[7]'),
+
+(183, 'Historic Fort Tour', 'Culture & History', 'Castillo San Felipe del Morro, San Juan, PR', 'Walk the ramparts of a centuries-old Spanish fortress.', '[7]', '[3]'),
+
+(183, 'Beach Hammock & Piña Coladas', 'Relaxation & Wellness', 'Flamenco Beach, Culebra, PR', 'Swing in a hammock with a cold drink and zero regrets.', '[3, 7]', '[]'),
+
+(183, 'Street Art & Mofongo Crawl', 'Culture & History', 'Santurce, San Juan, PR', 'See murals and taste mofongo at hole-in-the-wall gems.', '[3]', '[7]'),
+
+(183, 'Island Hopping by Catamaran', 'Adventure & Outdoors', 'Fajardo Marina, PR', 'Jump between tropical islands with snacks and snorkeling gear.', '[7]', '[3]'),
+
+(183, 'Sunset Drum Circle', 'Entertainment & Nightlife', 'Ocean Park Beach, San Juan, PR', 'Join a beach drum jam at golden hour—no rhythm required.', '[3]', '[7]'),
+
+(183, 'Spa Day in the Mountains', 'Relaxation & Wellness', 'Orocovis, PR', 'Steam, soak, and sigh in the lush Puerto Rican highlands.', '[7]', '[3]');

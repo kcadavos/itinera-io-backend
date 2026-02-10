@@ -60,7 +60,7 @@ INSERT INTO Trip (Destination, StartDate, EndDate, OwnerId, ParticipantsId, isVo
 VALUES
 ('Italy', '2025-06-10', '2025-06-20', 11, '[12,3,4,5,25,6,13,16,14,23,31]', 1);
 
-select * from trip where ownerId=44
+select * from trip where ownerId=1
 
 
 
@@ -84,3 +84,20 @@ VALUES
 
 
 select * from trip
+
+INSERT INTO Trip (Destination, StartDate, EndDate, OwnerId, ParticipantsId, isVotingOpen)
+VALUES
+('Spain - Andalusia', '2025-10-05', '2025-10-18', 44, '[3,5,6,8,10,14]', 1);
+
+
+Select * from [User]
+
+
+INSERT INTO Trip (Destination, StartDate, EndDate, OwnerId, ParticipantsId, isVotingOpen)
+VALUES
+('Portland', '2025-06-03', '2025-06-05', 44, '[7,6,9,5,12,3]', 1);
+
+select * from trip where id =183
+
+delete from [User] where id IN (82);
+
